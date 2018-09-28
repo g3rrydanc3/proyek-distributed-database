@@ -5,8 +5,8 @@ module.exports = {
   entry: './script.js',
   output: {
     filename: 'bundle.js',
-    publicPath: 'asset',
-    path: __dirname + '/asset/'
+    publicPath: 'public',
+    path: __dirname + '/public/asset/'
   },
   module: {
     rules: [
