@@ -8,4 +8,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <title>JavaScript Example</title>
 </head>
 <body>
-  
+  <div class="container">

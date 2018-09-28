@@ -1,12 +1,22 @@
 'use strict';
 
+//#region CSS IMPORT
+import 'bootstrap/dist/css/bootstrap.min.css';
+//#endregion
+
 import 'script-loader!jquery';
 import 'script-loader!bootstrap';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'script-loader!datatables.net';
+import 'script-loader!datatables.net-bs4';
 
 import AutoNumeric from 'autonumeric';
 window.AutoNumeric = AutoNumeric;
+
+$.extend(true, $.fn.dataTable.defaults, {
+    "autoWidth": false,
+    "destroy": true,
+});
 
 const autoNumericOptionsRupiah = {
     digitGroupSeparator        : '.',
