@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<?php $this->load->view("header") ?>
+<?php $this->load->view("frontoffice/header") ?>
 
 <!-- Page Content -->
 <div class="container">
@@ -114,7 +114,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </div>
 
-<?php $this->load->view("footer") ?>
+<?php $this->load->view("frontoffice/footer") ?>
 
 <script>
 $(document).ready(function() {
