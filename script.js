@@ -1,7 +1,10 @@
 'use strict';
 
 //#region CSS IMPORT
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'datatables.net-bs4/css/dataTables.bootstrap4.css';
+import './style.css';
 //#endregion
 
 import 'script-loader!jquery';
