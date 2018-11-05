@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+define('HOTEL_NAME', "Vixion Hotel");
+define('UID',"a");
+
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace
