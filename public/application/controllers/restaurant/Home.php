@@ -5,6 +5,6 @@ class Home extends MY_Controller {
 	public function index()
 	{
 		$this->dataView['title'] = "Hotel ABC";
-		$this->load->view('restaurant/home', $this->dataView);
+		$this->load->view('frontoffice/home', $this->dataView);
 	}
 }
