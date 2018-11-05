@@ -3,16 +3,16 @@
 <body>
 	<div class="portal-button-list">
 		<div class="portal-button">
-			<a href="<?= site_url('frontoffice/home')?>"><button class="btn btn-lg btn-primary btn-block">Front Office</button></a>
+			<a href="<?= site_url('auth/login/frontoffice')?>"><button class="btn btn-lg btn-primary btn-block">Front Office</button></a>
 		</div>
 		<div class="portal-button">
-			<a href="<?= site_url('laundry/home')?>"><button class="btn btn-lg btn-primary btn-block">Laundry</button></a>
+			<a href="<?= site_url('auth/login/laundry')?>"><button class="btn btn-lg btn-primary btn-block">Laundry</button></a>
 		</div>
 		<div class="portal-button">
-			<a href="<?= site_url('restaurant/home')?>"><button class="btn btn-lg btn-primary btn-block">Restaurant</button></a>
+			<a href="<?= site_url('auth/login/restaurant')?>"><button class="btn btn-lg btn-primary btn-block">Restaurant</button></a>
 		</div>
 		<div class="portal-button">
-			<a href="<?= site_url('travelagent/home')?>"><button class="btn btn-lg btn-primary btn-block">Travel Agent</button></a>
+			<a href="<?= site_url('auth/login/travelagent')?>"><button class="btn btn-lg btn-primary btn-block">Travel Agent</button></a>
 		</div>
 	</div>
 </body>

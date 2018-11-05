@@ -11,16 +11,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <h1 class="h3 mb-3 font-weight-normal">Sign in <?= $all_module[$module] ?></h1>
 
       <label for="inputUsername" class="sr-only">Username</label>
-      <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required autofocus>
+      <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" value=" " required autofocus>
 
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" value=" " required>
 
-      <div class="checkbox mb-3">
+      <!--<div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-      </div>
+      </div>-->
 
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
