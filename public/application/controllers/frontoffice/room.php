@@ -45,13 +45,13 @@ class Room extends CI_Controller {
 			}
 		}
 		$data = array('title' => 'Add Rooms - DB Hotel Management System', 'page' => 'room');
-		$this->load->view('header', $data);
+		$this->load->view('frontoffice/header', $data);
 
 		$room_types = $this->room_m->get_room_types();
 		$viewdata['room_types'] = $room_types;
-		$this->load->view('room/add',$viewdata);
+		$this->load->view('frontoffice/room/add',$viewdata);
 
-		$this->load->view('footer');
+		$this->load->view('frontoffice/footer');
 	}
 
 	function delete($min_id, $max_id)
@@ -82,7 +82,7 @@ class Room extends CI_Controller {
 			}
 		}
 		$data = array('title' => 'Edit Rooms - DB Hotel Management System', 'page' => 'room');
-		$this->load->view('header', $data);
+		$this->load->view('frontoffice/header', $data);
 
 		$room_types = $this->room_m->get_room_types();
 
@@ -92,21 +92,21 @@ class Room extends CI_Controller {
 		$room_range->max_id = $max_id;
 		$viewdata['room_range'] = $room_range;
 		$viewdata['room_types'] = $room_types;
-		$this->load->view('room/edit',$viewdata);
+		$this->load->view('frontoffice/room/edit',$viewdata);
 
-		$this->load->view('footer');
+		$this->load->view('frontoffice/footer');
 	}
 
 	public function index()
 	{
-		$rooms = $this->room_m->get_rooms();
+		//$rooms = $this->room_m->get_rooms();
 
-		$viewdata = array('rooms' => $rooms);
-
+		//$viewdata = array('rooms' => $rooms);
+		$viewdata = "";
 		$data = array('title' => 'Rooms - DB Hotel Management System', 'page' => 'room');
-		$this->load->view('header', $data);
-		$this->load->view('room/list',$viewdata);
-		$this->load->view('footer');
+		$this->load->view('frontoffice/header', $data);
+		$this->load->view('frontoffice/room/list',$viewdata);
+		$this->load->view('frontoffice/footer');
 	}
 }
 

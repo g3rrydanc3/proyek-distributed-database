@@ -37,11 +37,12 @@ class Departments extends CI_Controller {
 		}
 
 		$data = array('title' => 'Add Department - DB Hotel Management System', 'page' => 'departments');
-		$this->load->view('header', $data);
-		$departments = $this->departments_m->get_departments();
-		$viewdata = array('departments' => $departments);
-		$this->load->view('departments/add',$viewdata);
-		$this->load->view('footer');
+		$this->load->view('frontoffice/header', $data);
+		//$departments = $this->departments_m->get_departments();
+		//$viewdata = array('frontoffice/departments' => $departments);
+		$viewdata = "";
+		$this->load->view('frontoffice/departments/add',$viewdata);
+		$this->load->view('frontoffice/footer');
 	}
 
 	function delete($department_id)
@@ -75,14 +76,14 @@ class Departments extends CI_Controller {
 
 	public function index()
 	{
-		$departments = $this->departments_m->get_departments();
+		//$departments = $this->departments_m->get_departments();
 
-		$viewdata = array('departments' => $departments);
-
+		//$viewdata = array('departments' => $departments);
+		$viewdata = "";
 		$data = array('title' => 'Departments - DB Hotel Management System', 'page' => 'departments');
-		$this->load->view('header', $data);
-		$this->load->view('departments/list',$viewdata);
-		$this->load->view('footer');
+		$this->load->view('frontoffice/header', $data);
+		$this->load->view('frontoffice/departments/list',$viewdata);
+		$this->load->view('frontoffice/footer');
 	}
 }
 

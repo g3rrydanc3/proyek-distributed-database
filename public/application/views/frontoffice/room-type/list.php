@@ -17,20 +17,20 @@
 				</thead>
 				<tbody>
 				<?
-					foreach ($room_types as $rt) {
+					//foreach ($room_types as $rt) {
 						// $emp->username
 				?>
-				  <tr>
-				    <td> <?=$rt->room_type ?> </td>
-				    <td> <?=$rt->room_price ?>$ </td>
-				    <td> <?=$rt->room_details ?> </td>
-				    <td> <?=$rt->room_quantity ?> </td>
+				  <!--<tr>
+				    <td> <?//=$rt->room_type ?> </td>
+				    <td> <?//=$rt->room_price ?>$ </td>
+				    <td> <?//=$rt->room_details ?> </td>
+				    <td> <?//=$rt->room_quantity ?> </td>
 				    <td class="td-actions">
-				    	<a href="/room-type/edit/<?=$rt->room_type?>" class="btn btn-small btn-primary"><i class="btn-icon-only icon-edit"> </i></a>
-				    	<a href="/room-type/delete/<?=$rt->room_type?>" onclick="return confirm('Are you sure ?')" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a>
+				    	<a href="/room-type/edit/<?//=$rt->room_type?>" class="btn btn-small btn-primary"><i class="btn-icon-only icon-edit"> </i></a>
+				    	<a href="/room-type/delete/<?//=$rt->room_type?>" onclick="return confirm('Are you sure ?')" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a>
 				    </td>
-				  </tr>
-				<? } ?>
+				  </tr> -->
+				<? //} ?>
 				</tbody>
 			</table>
 		</div>

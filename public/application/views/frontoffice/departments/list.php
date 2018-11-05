@@ -16,16 +16,16 @@
 				</thead>
 				<tbody>
 				<?
-					foreach ($departments as $dept) {
+					//foreach ($departments as $dept) {
 						// $emp->username
 				?>
-				  <tr>
-				    <td> <?=$dept->department_id?> </td>
-				    <td> <?=$dept->department_name?> </td>
-				    <td> <?=$dept->department_budget?> </td>
-				    <td class="td-actions"><a href="/departments/edit/<?=$dept->department_id?>" class="btn btn-small btn-primary"><i class="btn-icon-only icon-edit"> </i></a><a href="/departments/delete/<?=$dept->department_id?>" onclick="return confirm('Are you sure ?')" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-				  </tr>
-				<? } ?>
+				  <!--<tr>
+				    <td> <?//=$dept->department_id?> </td>
+				    <td> <?//=$dept->department_name?> </td>
+				    <td> <?//=$dept->department_budget?> </td>
+				    <td class="td-actions"><a href="/departments/edit/<?//=$dept->department_id?>" class="btn btn-small btn-primary"><i class="btn-icon-only icon-edit"> </i></a><a href="/departments/delete/<?=$dept->department_id?>" onclick="return confirm('Are you sure ?')" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
+				  </tr>-->
+				<? //} ?>
 				</tbody>
 			</table>
 		</div>

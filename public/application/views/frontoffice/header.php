@@ -65,20 +65,15 @@
         <div class="subnavbar-inner">
           <div class="container">
             <ul class="mainnav">
-              <li <?php if($page == "dashboard"){ echo 'class="active"'; } ?> > <a href="/"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-              <li <?php if($page == "employee"){ echo 'class="active"'; } ?> > <a href="<?php  echo site_url() ?>/frontoffice/employee"><i class="icon-user"></i><span>Employees</span> </a> </li>
+              <li <?php if($page == "dashboard"){ echo 'class="active"'; } ?> > <a href="<?php  echo site_url() ?>/frontoffice/welcome"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
               <li <?php if($page == "reservation"){ echo 'class="active"'; } ?> > <a href="<?php  echo site_url() ?>/frontoffice/reservation"><i class="icon-list-alt"></i><span>Reservation</span> </a> </li>
               <li class="dropdown <?php if($page == "room" || $page == "room_type"){ echo 'active'; } ?> "> <a href="javascript:void;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-home"></i><span>Rooms</span> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="<?php  echo site_url() ?>/frontoffice/room">Rooms</a></li>
-                  <li><a href="<?php  echo site_url() ?>/frontoffice/room-type">Room Types</a></li>
+                  <li><a href="<?php  echo site_url() ?>/frontoffice/room_type">Room Types</a></li>
                 </ul>
               </li>
               <li <?php if($page == "departments"){ echo 'class="active"'; } ?> > <a href="<?php  echo site_url() ?>/frontoffice/departments"><i class="icon-file"></i><span>Depatments</span> </a> </li>
-              <li <?php if($page == "restaurant"){ echo 'class="active"'; } ?> > <a href="<?php  echo site_url() ?>/frontoffice/restaurant"><i class="icon-fire"></i><span>Restaurants</span> </a> </li>
-              <li <?php if($page == "medical_service"){ echo 'class="active"'; } ?> > <a href="<?php  echo site_url() ?>/frontoffice/medical_service"><i class="icon-user-md"></i><span>Medical Service</span> </a> </li>
-              <li <?php if($page == "sport_facility"){ echo 'class="active"'; } ?> > <a href="<?php  echo site_url() ?>/frontoffice/sport_facility"><i class="icon-trophy "></i><span>Sport Facility</span> </a> </li>
-              <li <?php if($page == "massage_room"){ echo 'class="active"'; } ?> > <a href="<?php  echo site_url() ?>/frontoffice/massage_room"><i class="icon-retweet "></i><span>Massage Room</span> </a> </li>
             </ul>
           </div>
           <!-- /container --> 

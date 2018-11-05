@@ -47,9 +47,9 @@ class Room_type extends CI_Controller {
 		}
 
 		$data = array('title' => 'Add Room Type - DB Hotel Management System', 'page' => 'room_type');
-		$this->load->view('header', $data);
-		$this->load->view('room-type/add', $viewdata);
-		$this->load->view('footer');
+		$this->load->view('frontoffice/header', $data);
+		$this->load->view('frontoffice/room-type/add', $viewdata);
+		$this->load->view('frontoffice/footer');
 	}
 
 	function delete($room_type)
@@ -85,14 +85,14 @@ class Room_type extends CI_Controller {
 
 	public function index()
 	{
-		$room_types = $this->room_m->get_room_types();
+		//$room_types = $this->room_m->get_room_types();
 
-		$viewdata = array('room_types' => $room_types);
-
+		//$viewdata = array('room_types' => $room_types);
+		$viewdata = "";
 		$data = array('title' => 'Rooms - DB Hotel Management System', 'page' => 'room_type');
-		$this->load->view('header', $data);
-		$this->load->view('room-type/list',$viewdata);
-		$this->load->view('footer');
+		$this->load->view('frontoffice/header', $data);
+		$this->load->view('frontoffice/room-type/list',$viewdata);
+		$this->load->view('frontoffice/footer');
 	}
 }
 

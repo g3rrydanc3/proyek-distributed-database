@@ -17,20 +17,20 @@
 				</thead>
 				<tbody>
 				<?
-					foreach ($rooms as $rm) {
+					//foreach ($rooms as $rm) {
 						// $emp->username
 				?>
-				  <tr>
-				    <td> <?=$rm->room_type ?> </td>
-				    <td> <?=$rm->min_id ?> </td>
-				    <td> <?=$rm->max_id?> </td>
-				    <td> <?=($rm->max_id-$rm->min_id+1) ?> </td>
+				  <!--<tr>
+				    <td> <?//=$rm->room_type ?> </td>
+				    <td> <?//=$rm->min_id ?> </td>
+				    <td> <?//=$rm->max_id?> </td>
+				    <td> <?//=($rm->max_id-$rm->min_id+1) ?> </td>
 				    <td class="td-actions">
-				    	<a href="/room/edit/<?=$rm->room_type?>/<?=$rm->min_id?>/<?=$rm->max_id?>" class="btn btn-small btn-primary"><i class="btn-icon-only icon-edit"> </i></a>
-				    	<a href="/room/delete/<?=$rm->min_id?>/<?=$rm->max_id?>" onclick="return confirm('Are you sure ?')" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a>
+				    	<a href="/room/edit/<?//=$rm->room_type?>/<?//=$rm->min_id?>/<?//=$rm->max_id?>" class="btn btn-small btn-primary"><i class="btn-icon-only icon-edit"> </i></a>
+				    	<a href="/room/delete/<?//=$rm->min_id?>/<?//=$rm->max_id?>" onclick="return confirm('Are you sure ?')" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a>
 				    </td>
-				  </tr>
-				<? } ?>
+				  </tr>-->
+				<? //} ?>
 				</tbody>
 			</table>
 		</div>
