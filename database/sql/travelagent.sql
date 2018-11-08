@@ -1,13 +1,13 @@
-connect system/123@frontoffice
+connect system/123@travelagent
 
-drop user adminfrontoffice cascade;
-drop user employeefrontoffice cascade;
+drop user admintravelagent cascade;
+drop user employeetravelagent cascade;
 
-create user adminfrontoffice identified by admin;
-grant connect, UNLIMITED TABLESPACE, resource to adminfrontoffice;
+create user admintravelagent identified by admin;
+grant connect, UNLIMITED TABLESPACE, resource to admintravelagent;
 
-create user employeefrontoffice identified by employee;
-grant connect to employeefrontoffice;
+create user employeetravelagent identified by employee;
+grant connect to employeetravelagent;
 
 -- -----------------------------------------------------
 -- Table customer
