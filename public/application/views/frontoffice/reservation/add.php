@@ -2,7 +2,7 @@
   <div class="main-inner">
     <div class="container">
       <div class="span4">
-        <a href="/customer/add/reservation" class="btn btn-success btn-large">Add Customer</a>
+        <a href="<?= site_url(); ?>/frontoffice/customer/add/reservation" class="btn btn-success btn-large">Add Customer</a>
 
         <div class="account-container">
           
@@ -11,36 +11,30 @@
             <form action="/reservation/check" method="post">
             
               <h1>Search for Rooms</h1>    
-<? if(isset($error)) {?>
-      <div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <!--<strong>Error!</strong> <?//=$error?>-->
-      </div>
-<? } ?>
-<? if(isset($success)) {?>
-      <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <!--<strong>Success!</strong> <?//=$success?>-->
-      </div>
-<? } ?>
+      <? if(isset($error)) {?>
+            <div class="alert alert-danger">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <!--<strong>Error!</strong> <?//=$error?>-->
+            </div>
+      <? } ?>
+      <? if(isset($success)) {?>
+            <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <!--<strong>Success!</strong> <?//=$success?>-->
+            </div>
+      <? } ?>
       <div class="add-fields">
 
         <div class="field">
-          <label for="customer_TCno">Customer TC no:</label>
-          <input type="text" id="customer_TCno" name="customer_TCno" required value="" placeholder="Customer ID no"/>
+          <label for="customer_Name">Customer Name:</label>
+          <input type="text" id="customer_Name" name="customer_Name" required value="" placeholder="Customer Name"/>
         </div> <!-- /field -->
 
         <div class="field">
           <label for="room_type">Room Type:</label>
           <select id="room_type" name="room_type">
-          <?
-            foreach ($room_types as $k=>$rt) {
-              ?>
-              <option value="<?=$rt->room_type?>" <? if($k==0) { echo "selected"; } ?>><?=$rt->room_type?></option>
-              <?
-            }
-          ?>
-         </select>
+            <option value="a">a</option>
+          </select>
         </div> <!-- /field -->
         
         <div class="field">

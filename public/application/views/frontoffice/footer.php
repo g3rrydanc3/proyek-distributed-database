@@ -2,7 +2,7 @@
   <div class="footer-inner">
     <div class="container">
       <div class="row">
-        <div class="span12"> &copy; 2013 <a href="http://hotel.cihadoge.com/">DB Hotel Management System</a>. <span class="pull-right">Fadime Tugba DOGAN - Cihad OGE - Furkan Mustafa AKDEMIR</span> </div>
+        <div class="span12"> &copy; 2018 <a href="">Vixion</a>. <span class="pull-right">Distributed Database</span> </div>
         <!-- /span12 --> 
       </div>
       <!-- /row --> 
@@ -15,13 +15,13 @@
 <!-- Le javascript
 ================================================== --> 
 <!-- Placed at the end of the document so the pages load faster --> 
-<script src="<?php  echo base_url() ?>/asset/js/frontoffice/jquery-1.7.2.min.js"></script> 
-<script src="<?php  echo base_url() ?>/asset/js/frontoffice/excanvas.min.js"></script> 
-<script src="<?php  echo base_url() ?>/asset/js/frontoffice/chart.min.js" type="text/javascript"></script> 
-<script src="<?php  echo base_url() ?>/asset/js/frontoffice/bootstrap.js"></script>
-<script language="javascript" type="text/javascript" src="<?php  echo base_url() ?>/asset/js/frontoffice/full-calendar/fullcalendar.min.js"></script>
+<script src="<?php  echo base_url() ?>asset/js/frontoffice/jquery-1.7.2.min.js"></script> 
+<script src="<?php  echo base_url() ?>asset/js/frontoffice/excanvas.min.js"></script> 
+<script src="<?php  echo base_url() ?>asset/js/frontoffice/chart.min.js" type="text/javascript"></script> 
+<script src="<?php  echo base_url() ?>asset/js/frontoffice/bootstrap.js"></script>
+<script language="javascript" type="text/javascript" src="<?php  echo base_url() ?>asset/js/frontoffice/full-calendar/fullcalendar.min.js"></script>
  
-<script src="<?php  echo base_url() ?>/asset/js/frontoffice/base.js"></script> 
+<script src="<?php  echo base_url() ?>asset/js/frontoffice/base.js"></script> 
 
 <?
 if($page == "reservation" ) {
@@ -176,53 +176,7 @@ if($page == "reservation" ) {
         }    
 
     </script><!-- /Calendar -->
-    <!-- Welcome Guide -->
-    <?
-    if(SHOW_GUIDE) {
-    ?>
-    <script src="<?php  echo base_url() ?>/asset/js/frontoffice/guidely/guidely.min.js"></script>
-
-    <script>
-    $(function () {
-      
-      guidely.add ({
-        attachTo: '#target-1'
-        , anchor: 'top-left'
-        , title: 'Today \'s Stats'
-        , text: 'You can see how many services are registered today. We used stored procedure here.'
-      });
-      
-      guidely.add ({
-        attachTo: '#target-2'
-        , anchor: 'top-left'
-        , title: 'Next Week Reservations Chart'
-        , text: 'You can see next week\'s hotel situation. It shows how many customers will be hosted next week.'
-      });
-
-      guidely.add ({
-        attachTo: '#target-3'
-        , anchor: 'top-left'
-        , title: 'Most Favorite Customer'
-        , text: 'Here, you can see the customer who spend most money to our hotel. We used MAX, SUM, GROUP BY functions on our database.'
-      });
-      
-      
-      guidely.add ({
-        attachTo: '#target-4'
-        , anchor: 'top-left'
-        , title: 'Most Frequent Customers'
-        , text: 'Here, you can see most visited customers. We used GROUP BY, ORDER functions here.'
-      });
-      
-      guidely.init ({ welcome: true, startTrigger: true });
-
-
-    });
-
-    </script>
     <? } ?>
-    <!--/Welcome Guide-->
-<? } ?>
     <style type="text/css">
     .calendar{-webkit-user-select: none; -moz-user-select: none;}
     </style>

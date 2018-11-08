@@ -5,16 +5,15 @@
     <meta charset="utf8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<link href="<?php  echo base_url() ?>/asset/css/frontoffice/bootstrap.min.css" rel="stylesheet">
-	<link href="<?php  echo base_url() ?>/asset/css/frontoffice/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="<?php  echo base_url() ?>asset/css/frontoffice/bootstrap.min.css" rel="stylesheet">
+	<link href="<?php  echo base_url() ?>asset/css/frontoffice/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
 	        rel="stylesheet">
-	<link href="<?php  echo base_url() ?>/asset/css/frontoffice/font-awesome.css" rel="stylesheet">
-	<link href="<?php  echo base_url() ?>/asset/css/frontoffice/style.css" rel="stylesheet">
-	<link href="<?php  echo base_url() ?>/asset/css/frontoffice/pages/dashboard.css" rel="stylesheet">
-	<link href="<?php  echo base_url() ?>/asset/css/frontoffice/pages/signin.css" rel="stylesheet" type="text/css">
-  <link href="<?php  echo base_url() ?>/asset/js/frontoffice/guidely/guidely.css" rel="stylesheet"> 
-
+	<link href="<?php  echo base_url() ?>asset/css/frontoffice/font-awesome.css" rel="stylesheet">
+	<link href="<?php  echo base_url() ?>asset/css/frontoffice/style.css" rel="stylesheet">
+	<link href="<?php  echo base_url() ?>asset/css/frontoffice/pages/dashboard.css" rel="stylesheet">
+	<link href="<?php  echo base_url() ?>asset/css/frontoffice/pages/signin.css" rel="stylesheet" type="text/css">
+  <!--<link href="<?php  echo base_url() ?>asset/js/frontoffice/guidely/guidely.css" rel="stylesheet"> -->
 
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
@@ -44,8 +43,6 @@
                     <li><a href="<?= site_url(); ?>/auth/logout/frontoffice">Logout</a></li>
                   </ul>
                 </li>
-                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?="FrontOffice"?></a>
-                </li>
               </ul>
               <form class="navbar-search pull-right" action="/search" method="POST">
                 <input type="text" name="customer" class="search-query" placeholder="Search Customer">
@@ -74,6 +71,8 @@
                   <li><a href="<?php  echo site_url() ?>/frontoffice/room_type">Room Types</a></li>
                 </ul>
               </li>
+              <li > <a href="<?php  echo site_url() ?>/frontoffice/customer"><i class="icon-user"></i><span>Customer</span> </a></li>
+              <li > <a href="<?php  echo site_url() ?>/frontoffice/employee"><i class="icon-user"></i><span>Employee</span> </a></li>
             </ul>
           </div>
           <!-- /container --> 

@@ -28,75 +28,29 @@ class Customer extends CI_Controller {
 	{
 		// 	customer_id	customer_firstname	customer_lastname	customer_TCno	customer_city	customer_country	customer_telephone	customer_email
 		$data = $this->input->post();
-		if($data["customer_TCno"])
+		/*if($data["customer_TCno"])
 		{
 			$this->customer_m->add_customer($data);
 			redirect("/$ref");
-		}
+		}*/
 
 		$viewdata = array('reference' => 'reservation');
 		$data = array('title' => 'Add Customer - DB Hotel Management System', 'page' => 'reservation');
-		$this->load->view('header', $data);
-		$this->load->view('customer/add',$viewdata);
-		$this->load->view('footer');
+		$this->load->view('frontoffice/header', $data);
+		$this->load->view('frontoffice/customer/add',$viewdata);
+		$this->load->view('frontoffice/footer');
 	}
-/*
-	function delete($employee_id)
-	{
-		$this->employee_m->deleteEmployee($employee_id);
-		redirect("/employee");
-	}
-
-	public function edit($employee_id)
-	{
-		if($this->input->post("username") && $this->input->post("password") && $this->input->post("email"))
-		{
-			$username = $this->input->post("username");
-			$password = $this->input->post("password");
-			$firstname = $this->input->post("firstname");
-			$lastname = $this->input->post("lastname");
-			$telephone = $this->input->post("telephone");
-			$email = $this->input->post("email");
-			$department_id = $this->input->post("department_id");
-			$type = $this->input->post("type");
-			$salary = $this->input->post("salary");
-			$hiring_date = $this->input->post("hiring_date");
-			
-			$this->employee_m->editEmployee($employee_id, $username, $password, $firstname, $lastname, $telephone, $email, $department_id, $type, $salary, $hiring_date);
-			redirect("/employee");
-		}
-		
-		$data = array('title' => 'Edit Employee - DB Hotel Management System', 'page' => 'employee');
-		$this->load->view('header', $data);
-
-		$departments = $this->employee_m->getDepartments();
-		$employee = $this->employee_m->getEmployee($employee_id);
-		
-		$viewdata = array('departments' => $departments, 'employee'  => $employee[0]);
-		$this->load->view('employee/edit',$viewdata);
-
-		$this->load->view('footer');
-	}
-
+	
 	public function index()
 	{
-		$this->check_login();
-		
-		$room_types = $this->room_m->getRoomTypes();
-		$viewdata = array('room_types' => $room_types);
-		$data = array('title' => 'Reservation - DB Hotel Management System', 'page' => 'reservation');
-		$this->load->view('header', $data);
-		$this->load->view('reservation/add', $viewdata);
-		$this->load->view('footer');
+		//$rooms = $this->room_m->get_rooms();
+		//$viewdata = array('rooms' => $rooms);
+		$viewdata = "";
+		$data = array('title' => 'Customer - Vixion', 'page' => 'customer');
+		$this->load->view('frontoffice/header', $data);
+		$this->load->view('frontoffice/customer/list',$viewdata);
+		$this->load->view('frontoffice/footer');
 	}
-	public function make($year, $month, $day)
-	{
-		$data = array('title' => 'Reservation - DB Hotel Management System', 'page' => 'reservation');
-		$this->load->view('header', $data);
-		echo $year." ".$month." ".$day;
-		// $this->load->view('reservation/make');
-		$this->load->view('footer');
-	}*/
 }
 
 /* End of file welcome.php */

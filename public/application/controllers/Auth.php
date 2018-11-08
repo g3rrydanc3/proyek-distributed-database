@@ -68,6 +68,7 @@ class Auth extends MY_Controller {
 	public function logout($module = null){
 		if($module !== null && array_key_exists($module, $this->all_module)){
 			$this->session->unset_userdata('id' . $module);
+			redirect(site_url('portal'));
 		}
 		else{
 			show_404();

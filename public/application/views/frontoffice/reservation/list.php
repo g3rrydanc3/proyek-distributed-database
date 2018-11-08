@@ -12,18 +12,16 @@
 			<div class="add-fields">
 
 				<!--div class="field">
-					<input type="hidden" id="customer_id" name="customer_id" required readonly value="<?=$customer_id?>"/>
+					<input type="hidden" id="customer_id" name="customer_id" required readonly value="<?//=$customer_id?>"/>
 				</div--> <!-- /field -->
 
 				<div class="field">
 					<label for="customer_TCno">Customer TC no:</label>
-					<input type="text" id="customer_TCno" name="customer_TCno" required readonly value="<?=$customer_TCno?>"/>
+					<input type="text" id="customer_TCno" name="customer_TCno" required readonly value="a"/>
 				</div> <!-- /field -->
 
 				<div class="field">
 					<label for="room_type">Room Type:</label>
-					<input type="text" id="room_type" name="room_type" required readonly value="<?=$room_type?>"/>
-				 </select>
 				</div> <!-- /field -->
 
 				<div class="field">
@@ -39,9 +37,9 @@
 				<div class="row">
 					<div class="span12">
 		<?php
-			$size = count($rooms);
-			$cols = ceil(sqrt($size));
-			$rows = ceil($size/$cols);
+			//$size = count($rooms);
+			//$cols = ceil(sqrt($size));
+			//$rows = ceil($size/$cols);
 		?>
 					<table class="table table-striped table-bordered">
 						<thead>

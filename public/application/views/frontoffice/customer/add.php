@@ -8,7 +8,7 @@
 <? if(isset($error)) {?>
 			<div class="alert alert-danger">
               <button type="button" class="close" data-dismiss="alert">×</button>
-              <strong>Error!</strong> <?=$error?>
+              <strong>Error!</strong> <?//=$error?>
             </div>
 <? } ?>
 
@@ -25,28 +25,13 @@
 				</div> <!-- /field -->
 
 				<div class="field">
-					<label for="customer_TCno">TC no:</label>
-					<input type="text" id="TCno" name="customer_TCno" required value="" placeholder="Lastname"/>
+					<label for="customer_address">Address:</label>
+					<input type="text" id="address" name="customer_address" required value="" placeholder="Address"/>
 				</div> <!-- /field -->
 
 				<div class="field">
-					<label for="customer_telephone">Telephone:</label>
-					<input type="text" id="telephone" name="customer_telephone" value="" placeholder="Telephone"/>
-				</div> <!-- /field -->
-
-				<div class="field">
-					<label for="customer_email">Email:</label>
-					<input type="email" id="email" name="customer_email" required value="" placeholder="Email"/>
-				</div> <!-- /field -->
-
-				<div class="field">
-					<label for="customer_city">City:</label>
-					<input type="text" id="city" name="customer_city" value="" placeholder="City"/>
-				</div> <!-- /field -->
-
-				<div class="field">
-					<label for="customer_country">Country:</label>
-					<input type="text" id="country" name="customer_country" value="" placeholder="Country"/>
+					<label for="customer_phone">Phone:</label>
+					<input type="text" id="phone" name="customer_phone" value="" placeholder="Phone"/>
 				</div> <!-- /field -->
 
 			</div> <!-- /login-fields -->
