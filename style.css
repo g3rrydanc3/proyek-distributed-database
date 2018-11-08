@@ -1,3 +1,14 @@
 /* 
     Untuk menghindari tabrakan antar class, tolong beri nama awalan <modul>-....
 */
+
+.auth-back{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    
+}
+
+.auth-back > button {
+    font-size: 75px;
+}
