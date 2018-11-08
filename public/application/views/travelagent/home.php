@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container pt-3">
 	<div class="jumbotron">
 		<h1 class="display-2">
-			<?= strtoupper($hotel_name)?>
+			<?= $hotel_name?>
 		</h1>
 		<p>Best night you ever had!</p>
 	</div>
