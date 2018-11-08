@@ -1,13 +1,36 @@
+connect system/123@frontoffice
+
+drop user adminfrontoffice cascade;
+drop user employeefrontoffice cascade;
+
+create user adminfrontoffice identified by admin;
+grant connect, UNLIMITED TABLESPACE, resource to adminfrontoffice;
+
+create user employeefrontoffice identified by employee;
+grant connect to employeefrontoffice;
+
+
+
+connect adminfrontoffice/admin@frontoffice
+
+--DROP TABLE bill_detail CASCADE CONSTRAINT PURGE;
+--DROP TABLE service CASCADE CONSTRAINT PURGE;
+--DROP TABLE payment CASCADE CONSTRAINT PURGE;
+--DROP TABLE employee CASCADE CONSTRAINT PURGE;
+--DROP TABLE bill CASCADE CONSTRAINT PURGE;
+--DROP TABLE customer CASCADE CONSTRAINT PURGE;
+--DROP TABLE room CASCADE CONSTRAINT PURGE;
+--DROP TABLE room_type CASCADE CONSTRAINT PURGE;
+
 -- -----------------------------------------------------
 -- Table room_type
 -- -----------------------------------------------------
 CREATE TABLE room_type (
-  room_type_id NUMBER(10),
-  room_type VARCHAR2(100) CONSTRAINT NN_ROOM_TYPE_ROOM_TYPE NOT NULL,
-  description VARCHAR2(100) CONSTRAINT NN_ROOM_TYPE_DESCRIPTION NOT NULL,
-  capacity NUMBER(3) CONSTRAINT NN_ROOM_TYPE_CAPACITY NOT NULL,
-  price NUMBER(10) CONSTRAINT NN_ROOM_TYPE_PRICE NOT NULL,
-  CONSTRAINT PK_ROOM_TYPE_ROOM_TYPE_ID PRIMARY KEY (room_type_id))
+  room_type_id NUMBER(10) CONSTRAINT pk_room_type_id PRIMARY KEY,
+  room_type VARCHAR2(100) CONSTRAINT nn_room_type NOT NULL,
+  description VARCHAR2(100) CONSTRAINT nn_room_type_description NOT NULL,
+  capacity NUMBER(3) CONSTRAINT nn_room_type_capacity NOT NULL,
+  price NUMBER(10) CONSTRAINT nn_room_type_price NOT NULL)
 ;
 
 
@@ -15,10 +38,9 @@ CREATE TABLE room_type (
 -- Table room
 -- -----------------------------------------------------
 CREATE TABLE room (
-  room_no NUMBER(10),
-  type_id NUMBER(10) CONSTRAINT NN_ROOM_TYPE_ID NOT NULL,
-  status NUMBER(3) CONSTRAINT NN_ROOM_STATUS NOT NULL,
-  CONSTRAINT PK_ROOM_ROOM_NO PRIMARY KEY (room_no),
+  room_no NUMBER(10) CONSTRAINT pk_room_no PRIMARY KEY,
+  type_id NUMBER(10) CONSTRAINT nn_room_room_type_id NOT NULL,
+  status NUMBER(3) CONSTRAINT nn_room_status NOT NULL,
   CONSTRAINT fk_room_room_type
     FOREIGN KEY (type_id)
     REFERENCES room_type (room_type_id)
@@ -30,12 +52,12 @@ CREATE TABLE room (
 -- Table customer
 -- -----------------------------------------------------
 CREATE TABLE customer (
-  customer_id NUMBER(10),
-  first_name VARCHAR2(100) CONSTRAINT NN_CUSTOMER_FIRST_NAME NOT NULL,
-  last_name VARCHAR2(100) CONSTRAINT NN_CUSTOMER_LAST_NAME NOT NULL,
-  address VARCHAR2(100) CONSTRAINT NN_CUSTOMER_ADDRESS NOT NULL,
-  phone VARCHAR2(20) CONSTRAINT NN_CUSTOMER_PHONE NOT NULL,
-  CONSTRAINT PK_CUSTOMER_CUSTOMER_ID PRIMARY KEY (customer_id))
+  customer_id NUMBER(10) CONSTRAINT pk_customer_id PRIMARY KEY,
+  first_name VARCHAR2(100) CONSTRAINT nn_customer_first_name NOT NULL,
+  last_name VARCHAR2(100) CONSTRAINT nn_customer_last_name NOT NULL,
+  address VARCHAR2(100) CONSTRAINT nn_customer_address NOT NULL,
+  phone VARCHAR2(20) CONSTRAINT nn_customer_phone NOT NULL
+  )
 ;
 
 
@@ -43,11 +65,10 @@ CREATE TABLE customer (
 -- Table bill
 -- -----------------------------------------------------
 CREATE TABLE bill (
-  bill_id NUMBER(10),
-  customer_id NUMBER(10) CONSTRAINT NN_BILL_CUSTOMER_ID NOT NULL,
-  room_no NUMBER(10) CONSTRAINT NN_BILL_ROOM_NO NOT NULL,
-  total NUMBER(10) CONSTRAINT NN_BILL_TOTAL NOT NULL,
-  CONSTRAINT PK_BILL_BILL_ID PRIMARY KEY (bill_id),
+  bill_id NUMBER(10) CONSTRAINT pk_bill_id PRIMARY KEY,
+  customer_id NUMBER(10) CONSTRAINT nn_bill_customer_id NOT NULL,
+  room_no NUMBER(10) CONSTRAINT nn_bill_room_no NOT NULL,
+  total NUMBER(10) CONSTRAINT nn_bill_total NOT NULL,
   CONSTRAINT fk_bill_customer1
     FOREIGN KEY (customer_id)
     REFERENCES customer (customer_id)
@@ -63,13 +84,12 @@ CREATE TABLE bill (
 -- Table employee
 -- -----------------------------------------------------
 CREATE TABLE employee (
-  employee_id NUMBER(10),
-  first_name VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_FIRST_NAME NOT NULL,
-  last_name VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_LAST_NAME NOT NULL,
-  username VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_USERNAME NOT NULL,
-  password VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_PASSWORD NOT NULL,
-  CONSTRAINT PK_EMPLOYEE_EMPLOYEE_ID PRIMARY KEY (employee_id),
-  CONSTRAINT username_UNIQUE UNIQUE  (username))
+  employee_id NUMBER(10) CONSTRAINT pk_employee_id PRIMARY KEY,
+  first_name VARCHAR2(100) CONSTRAINT nn_employee_first_name NOT NULL,
+  last_name VARCHAR2(100) CONSTRAINT nn_employee_last_name NOT NULL,
+  username VARCHAR2(100) CONSTRAINT nn_employee_username NOT NULL,
+  password VARCHAR2(100) CONSTRAINT nn_employee_password NOT NULL,
+  CONSTRAINT unique_employee_username UNIQUE (username))
 ;
 
 
@@ -77,14 +97,13 @@ CREATE TABLE employee (
 -- Table payment
 -- -----------------------------------------------------
 CREATE TABLE payment (
-  payment_id NUMBER(10),
-  employee_id NUMBER(10) CONSTRAINT NN_PAYMENT_EMPLOYEE_ID NOT NULL,
-  bill_id NUMBER(10) CONSTRAINT NN_PAYMENT_BILL_ID NOT NULL,
-  customer_id NUMBER(10) CONSTRAINT NN_PAYMENT_CUSTOMER_ID NOT NULL,
-  payment_date TIMESTAMP CONSTRAINT NN_PAYMENT_PAYMENT_DATE NOT NULL,
-  payment_method VARCHAR2(100) CONSTRAINT NN_PAYMENT_PAYMENT_METHOD NOT NULL,
+  payment_id NUMBER(10) CONSTRAINT pk_payment_id PRIMARY KEY,
+  employee_id NUMBER(10) CONSTRAINT nn_payment_employee_id NOT NULL,
+  bill_id NUMBER(10) CONSTRAINT nn_payment_bill_id NOT NULL,
+  customer_id NUMBER(10) CONSTRAINT nn_payment_customer_id NOT NULL,
+  payment_date TIMESTAMP CONSTRAINT nn_payment_date NOT NULL,
+  payment_method VARCHAR2(100) CONSTRAINT nn_payment_method NOT NULL,
   card_no NUMBER(10) NULL,
-  CONSTRAINT PK_PAYMENT_PAYMENT_ID PRIMARY KEY (payment_id),
   CONSTRAINT fk_payment_customer1
     FOREIGN KEY (customer_id)
     REFERENCES customer (customer_id)
@@ -104,12 +123,11 @@ CREATE TABLE payment (
 -- Table service
 -- -----------------------------------------------------
 CREATE TABLE service (
-  service_id NUMBER(10),
-  room_no NUMBER(10) CONSTRAINT NN_SERVICE_ROOM_NO NOT NULL,
-  service_type VARCHAR2(45) CONSTRAINT NN_SERVICE_SERVICE_TYPE NOT NULL,
-  service_date TIMESTAMP CONSTRAINT NN_SERVICE_SERVICE_DATE NOT NULL,
-  total NUMBER(10) CONSTRAINT NN_SERVICE_TOTAL NOT NULL,
-  CONSTRAINT PK_SERVICE_SERVICE_ID PRIMARY KEY (service_id),
+  service_id NUMBER(10) CONSTRAINT pk_service_id PRIMARY KEY,
+  room_no NUMBER(10) CONSTRAINT nn_service_room_no NOT NULL,
+  service_type VARCHAR2(45) CONSTRAINT nn_service_type NOT NULL,
+  service_date TIMESTAMP CONSTRAINT nn_service_date NOT NULL,
+  total NUMBER(10) CONSTRAINT nn_service_total1e NOT NULL,
   CONSTRAINT fk_service_room1
     FOREIGN KEY (room_no)
     REFERENCES room (room_no)
@@ -121,10 +139,9 @@ CREATE TABLE service (
 -- Table bill_detail
 -- -----------------------------------------------------
 CREATE TABLE bill_detail (
-  bill_detail_id NUMBER(10),
-  payment_id NUMBER(10) CONSTRAINT NN_BILL_DETAIL_PAYMENT_ID NOT NULL,
-  service_id CONSTRAINT NN_BILL_DETAIL_SERVICE_ID NUMBER(10) NOT NULL,
-  CONSTRAINT PK_BILL_DETAIL_BILL_DETAIL_ID PRIMARY KEY (bill_detail_id),
+  bill_detail_id NUMBER(10) CONSTRAINT pk_bill_detail_id PRIMARY KEY,
+  payment_id NUMBER(10) CONSTRAINT nn_service_id NOT NULL,
+  service_id NUMBER(10) CONSTRAINT nn_ NOT NULL,
   CONSTRAINT fk_bill_detail_payment1
     FOREIGN KEY (payment_id)
     REFERENCES payment (payment_id)
@@ -134,3 +151,18 @@ CREATE TABLE bill_detail (
     REFERENCES service (service_id)
    )
 ;
+
+set serveroutput on
+BEGIN 
+	FOR x IN (SELECT * FROM tab)
+	LOOP
+		if lower(x.tname) != 'employee' then
+			dbms_output.put_line('SELECT, INSERT, UPDATE ' || x.tname);
+			EXECUTE IMMEDIATE 'GRANT SELECT, INSERT, UPDATE ON ' || x.tname || ' TO employeefrontoffice';
+		else
+			dbms_output.put_line('SELECT ' || x.tname);
+			EXECUTE IMMEDIATE 'GRANT SELECT ON ' || x.tname || ' TO employeefrontoffice';
+		end if;
+	END LOOP;
+END; 
+/
