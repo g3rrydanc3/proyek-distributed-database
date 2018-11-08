@@ -4,100 +4,127 @@ ipt access allowed');
 ?>
 <?php $this->load->view("travelagent/header") ?>
 
-<body>
+<head>
 	<ul>
 		<li><a href="#home">Travel Agent</a></li>
 		<li><a href="#contact">Contact</a></li>
 		<li style="float:right"><a class="active" href="#about">Logout</a></li>
 	</ul>
+	<style>
+	</style>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-	<div class="bg-contact2" style="background-image: url('<?php  echo base_url() ?>asset/images/bg-01.jpg');">
-		<div class="container-contact2">
-			<div class="wrap-contact2">
-				<form class="contact2-form validate-form">
-					<span class="contact2-form-title">
-						Contact Us
-					</span>
-					
-					<h3 STYLE="COLOR:GREY">Customer Info</h3>
-					<div class="wrap-input2 validate-input" data-validate="Name is required">
-						<input class="input2" type="text" name="name">
-						<span class="focus-input2" data-placeholder="YOUR NAME*"></span>
-					</div>
-
-					<div class="wrap-input2 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input2" type="text" name="email">
-						<span class="focus-input2" data-placeholder="YOUR EMAIL*"></span>
-					</div>
-
-					<div class="wrap-input2 validate-input" data-validate = "Message is required">
-						<INPUT TYPE = "TEXT" class="input2" name="message"></INPUT>
-						<span class="focus-input2" data-placeholder="YOUR PHONE*"></span>
-					</div>
-					
-					<br>
-					<h3 STYLE="COLOR:GREY">Order Info</h3>
-					<div class="wrap-input2 validate-input" data-validate="Name is required">
-						<label  CLASS="input2" for="job">Hotel Name : </label>
-						<input type="text" CLASS="input2" name="field4">
-					</div>
-
-					<div class="wrap-input2 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<label  CLASS="input2" for="job">Rooms :</label>
-						<input  CLASS="input2"  type="number" id="myNumber" min="1" value="1">
-					</div>
-
-					<div class="wrap-input2 validate-input" data-validate = "Message is required">
-						<label  class="input2" for="job">Duration (night):</label>
-						<input  class="input2" type="number" id="myNumber" min="1" value="1">
-					</div>
-					
-					<div class="wrap-input2 validate-input" data-validate = "Message is required">
-						<label class = "input2" for="job">Check In:</label>
-						<input class = "input2"  type="date" name="cin">
-					</div>
-					
-					<div class="wrap-input2 validate-input" data-validate = "Message is required">
-						<label class = "input2"  for="job">Check Out:</label>
-						<input type="date" class = "input2"  name="cout">
-					</div>
-
-					<div class="container-contact2-form-btn">
-						<div class="wrap-contact2-form-btn">
-							<div class="contact2-form-bgbtn"></div>
-							<button class="contact2-form-btn">
-								Apply
-							</button>
-						</div>
-					</div>
-				</form>
+</head>
+<body  style="background-image:url(<?php  echo base_url() ?>asset/images/travelagent.png); background-size: contain, cover;background-repeat: no-repeat;">
+  <br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <h3 style="color:white">HOTELS, HOMES, HOSTELS AND MORE</h3>
+      <p style="color:white">Get the best prices on 2,000,000+ properties, worldwide</p>
+	  
+	  <form action="/action_page.php">
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+			  <span class="input-group-text" class="fa fa-search"><i class="fa fa-search" aria-hidden="true"></i></span>
+			</div>
+			<input type="text" class="form-control" placeholder="Rooms" readonly>
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+			  <span class="input-group-text" class="fa fa-calendar"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+			</div>
+			<input type="date" class="form-control" placeholder="First Name">
+			<input type="date" class="form-control" placeholder="Last Name">
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+			  <span class="input-group-text" class="fa fa-bed"><i class="fa fa-bed" aria-hidden="true"></i></span>
+			</div>
+			<input type="number" class="form-control" placeholder="Rooms">
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	  </form>
+	  
+    </div>
+	<div class="col-sm-6" style="background-color:rgba(0,0,0,0.5);">
+		<div class="row">
+			<div class="col-sm-6">
+				  <div style="background-color:white;height:260px;margin-top:10px">
+						<img src="<?php  echo base_url() ?>asset/images/vip_rooms.jpg" alt="Snow" style="width:100%;height:100px;">
+						<center>
+							<h3 color="white">NAMA HOTEL</h3>
+							<h2>10%</h2>
+							<p><b>VIP Room</b></p>
+							<button class="btn btn-danger">Book Now</button>
+						</center>
+				  </div>
+			</div>
+			<div class="col-sm-6">
+				  <div style="background-color:white;height:260px;margin-left:10px;margin-top:10px">
+						<img src="<?php  echo base_url() ?>asset/images/poor_rooms.jpg" alt="Snow" style="width:100%;height:100px">
+						<center>
+							<h3 color="white">NAMA HOTEL</h3>
+							<h2>10%</h2>
+							<p><b>Poor Room</b></p>
+							<button class="btn btn-danger">Book Now</button>
+						</center>
+				  </div>
 			</div>
 		</div>
 	</div>
+  </div>
+  <div class="row">
+	<div class="col-sm-6">
+	</div>
+	<div class="col-sm-6" style="background-color:rgba(0,0,0,0.5);margin-top:10px">
+		<div id="demo" class="carousel slide" data-ride="carousel">
+		  <ul class="carousel-indicators">
+			<li data-target="#demo" data-slide-to="0" class="active"></li>
+			<li data-target="#demo" data-slide-to="1"></li>
+			<li data-target="#demo" data-slide-to="2"></li>
+		  </ul>
+		  <div class="carousel-inner">
+			<div class="carousel-item active">
+			  <img src="<?php  echo base_url() ?>asset/images/carousel_promo1.jpg" alt="Los Angeles" height="200px" style="margin-top:10px;margin-bottom:10px">
+			  <div class="carousel-caption">
+				<h3></h3>
+				<p></p>
+			  </div>   
+			</div>
+			<div class="carousel-item">
+			  <img src="<?php  echo base_url() ?>asset/images/carousel_promo2.jpg" alt="Chicago"  height="200px" style="margin-top:10px;margin-bottom:10px">
+			  <div class="carousel-caption">
+				<h3></h3>
+				<p></p>
+			  </div>   
+			</div>
+			<div class="carousel-item">
+			  <img src="<?php  echo base_url() ?>asset/images/carousel_promo3.jpg" alt="New York"  height="200px" style="margin-top:10px;margin-bottom:10px">
+			  <div class="carousel-caption">
+				<h3></h3>
+				<p></p>
+			  </div>   
+			</div>
+		  </div>
+		  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+			<span class="carousel-control-prev-icon"></span>
+		  </a>
+		  <a class="carousel-control-next" href="#demo" data-slide="next">
+			<span class="carousel-control-next-icon"></span>
+		  </a>
+		</div>
+	</div>
+  </div>
+</div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
-
-
-<!--===============================================================================================-->
-	<script src="<?php  echo base_url() ?>asset/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php  echo base_url() ?>asset/vendor/bootstrap/js/popper.js"></script>
-	<script src="<?php  echo base_url() ?>asset/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php  echo base_url() ?>asset/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php  echo base_url() ?>asset/js/main.js"></script>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-23581568-13');
-	</script>
 
 </body>
 </html>
