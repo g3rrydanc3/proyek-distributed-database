@@ -47,8 +47,9 @@ class Room extends CI_Controller {
 		$data = array('title' => 'Add Rooms - DB Hotel Management System', 'page' => 'room');
 		$this->load->view('frontoffice/header', $data);
 
-		$room_types = $this->room_m->get_room_types();
-		$viewdata['room_types'] = $room_types;
+		//$room_types = $this->room_m->get_room_types();
+		//$viewdata['room_types'] = $room_types;
+		$viewdata = "";
 		$this->load->view('frontoffice/room/add',$viewdata);
 
 		$this->load->view('frontoffice/footer');

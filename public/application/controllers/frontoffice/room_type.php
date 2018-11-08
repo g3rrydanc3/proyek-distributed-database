@@ -89,7 +89,7 @@ class Room_type extends CI_Controller {
 
 		//$viewdata = array('room_types' => $room_types);
 		$viewdata = "";
-		$data = array('title' => 'Rooms - DB Hotel Management System', 'page' => 'room_type');
+		$data = array('title' => 'Rooms - Vixion', 'page' => 'room_type');
 		$this->load->view('frontoffice/header', $data);
 		$this->load->view('frontoffice/room-type/list',$viewdata);
 		$this->load->view('frontoffice/footer');

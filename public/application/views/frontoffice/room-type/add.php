@@ -8,7 +8,7 @@
 <? if(isset($error)) {?>
 			<div class="alert alert-danger">
               <button type="button" class="close" data-dismiss="alert">×</button>
-              <strong>Error!</strong> <?=$error?>
+              <strong>Error!</strong> <?//=$error?>
             </div>
 <? } ?>
 			<div class="add-fields">
@@ -19,19 +19,19 @@
 				</div> <!-- /field -->
 				
 				<div class="field">
+					<label for="room_details">Description:</label>
+					<input type="text" id="description" name="description" value="" placeholder="Description of room"/>
+				</div> <!-- /field -->
+
+				<div class="field">
 					<label for="room_price">Price:</label>
 					<input type="number" min="1" id="price" name="price" required value="" placeholder="Price"/>
 					<i icon="icon-dollar"></i>
 				</div> <!-- /field -->
 
 				<div class="field">
-					<label for="room_details">Details:</label>
-					<input type="text" id="details" name="details" value="" placeholder="Details of room"/>
-				</div> <!-- /field -->
-
-				<!--div class="field">
-					<label for="room_quantity">Quantity:</label>
-					<input type="number" min="1" id="quantity" name="quantity" value="" placeholder="Quantity"/>
+					<label for="room_capacity">Capacity:</label>
+					<input type="number" min="1" id="capacity" name="capacity" value="" placeholder="Capacity"/>
 				</div--> <!-- /field -->
 
 			</div> <!-- /login-fields -->
