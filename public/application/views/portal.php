@@ -1,5 +1,18 @@
-<?php $this->load->view('_header')?>
-<link rel="stylesheet" type="text/css" href="<?= base_url('asset/css/portal.css') ?>">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<?php $this->load->view("_load_global_css")?>
+	<link rel="stylesheet" type="text/css" href="<?= base_url('asset/css/portal.css') ?>">
+
+	<title><?= $title?></title>
+</head>
+
 <body>
 	<div class="portal-button-list">
 		<div class="portal-button">
@@ -16,4 +29,5 @@
 		</div>
 	</div>
 </body>
-<?php $this->load->view('_footer')?>
+<?php $this->load->view("_load_global_js")?>
+</html>

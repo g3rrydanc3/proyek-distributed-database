@@ -3,31 +3,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends MY_Controller {
 
+	//--------------------------
+	//LOGIN 
+	//--------------------------
+	//MEMAKAI NAMA SESSION
+	//"id"+<module>
+	//CTH : idfrontoffice
+
+	//--------------------------
+	//CHECK LOGIN
+	//--------------------------
+	//$this->check_logged_in($module)
+	//
+
 	function __construct() {
 		parent::__construct();
-	}
-	
-	private function check_logged_in($module){
-		$this->load->library('session');
-
-		foreach ($this->all_module as $key => $value) {
-			if($this->session->userdata("id" . $key) !== null){
-				return true;
-				break;
-			}
-		}
-		
-		return false;
+		$this->dataView['title'] = "Login " .$this->dataView["hotel_name"];
 	}
 
 	private function show_login($module){
-		$this->dataView['title'] = "Login " . $this->all_module[$module];
+		$this->dataView['title'] .= " - " . $this->all_module[$module];
 		$this->dataView['module'] = $module;
 		$this->dataView['all_module'] = $this->all_module;
 		$this->load->view('auth/login', $this->dataView);
 	}
 
 	private function process_login($module){
+		switch ($module) {
+			case 'frontoffice':
+				$this->session->set_userdata("id". $module, "1");
+				$this->redirect($module);
+				break;
+			case 'laundry':
+				$this->session->set_userdata("id". $module, "1");
+				$this->redirect($module);
+				break;
+			case 'restaurant':
+				$this->session->set_userdata("id". $module, "1");
+				$this->redirect($module);
+				break;
+			case 'travelagent':
+				$this->session->set_userdata("id". $module, "1");
+				$this->redirect($module);
+				break;
+		}
+	}
+
+	private function redirect($module){
 		switch ($module) {
 			case 'frontoffice':
 				redirect(site_url('frontoffice/home'));
@@ -57,6 +79,9 @@ class Auth extends MY_Controller {
 					$this->show_login($module);
 				}
 
+			}
+			else{
+				$this->redirect($module);
 			}
 
 		}
