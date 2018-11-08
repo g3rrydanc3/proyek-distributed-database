@@ -8,10 +8,14 @@ import './style.css';
 //#endregion
 
 import 'script-loader!jquery';
+import 'script-loader!popper.js/dist/umd/popper';
 import 'script-loader!bootstrap';
 
 import 'script-loader!datatables.net';
 import 'script-loader!datatables.net-bs4';
+
+import 'script-loader!startbootstrap-sb-admin/js/sb-admin';
+import 'startbootstrap-sb-admin/css/sb-admin.css';
 
 import AutoNumeric from 'autonumeric';
 window.AutoNumeric = AutoNumeric;
