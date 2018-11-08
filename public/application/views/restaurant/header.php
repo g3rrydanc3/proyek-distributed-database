@@ -88,7 +88,7 @@
                                             <a href="https://spos.tecdiary.com/users/profile/1" class="btn btn-default btn-flat">Profile</a>
                                         </div>
                                         <div class="pull-right">
-                                            <a href="https://spos.tecdiary.com/logout" class="btn btn-default btn-flat sign_out">Sign Out</a>
+                                            <a href="<?= site_url(); ?>/auth/logout/restaurant" class="btn btn-default btn-flat sign_out">Sign Out</a>
                                         </div>
                                     </li>
                                 </ul>
