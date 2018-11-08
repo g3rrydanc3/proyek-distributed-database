@@ -88,21 +88,21 @@ ipt access allowed');
 		  </ul>
 		  <div class="carousel-inner">
 			<div class="carousel-item active">
-			  <img src="<?php  echo base_url() ?>asset/images/carousel_promo1.jpg" alt="Los Angeles" height="200px" style="margin-top:10px;margin-bottom:10px">
+			  <img src="<?php echo base_url() ?>asset/images/carousel_promo1.jpg" height="200px" style="margin-top:10px;margin-bottom:10px">
 			  <div class="carousel-caption">
 				<h3></h3>
 				<p></p>
 			  </div>   
 			</div>
 			<div class="carousel-item">
-			  <img src="<?php  echo base_url() ?>asset/images/carousel_promo2.jpg" alt="Chicago"  height="200px" style="margin-top:10px;margin-bottom:10px">
+			  <img src="<?php echo base_url() ?>asset/images/carousel_promo2.jpg"  height="200px" style="margin-top:10px;margin-bottom:10px">
 			  <div class="carousel-caption">
 				<h3></h3>
 				<p></p>
 			  </div>   
 			</div>
 			<div class="carousel-item">
-			  <img src="<?php  echo base_url() ?>asset/images/carousel_promo3.jpg" alt="New York"  height="200px" style="margin-top:10px;margin-bottom:10px">
+			  <img src="<?php echo base_url() ?>asset/images/carousel_promo3.jpg" height="200px" style="margin-top:10px;margin-bottom:10px">
 			  <div class="carousel-caption">
 				<h3></h3>
 				<p></p>

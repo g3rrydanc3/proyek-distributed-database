@@ -1,13 +1,24 @@
+connect system/123@travelagent
+
+drop user admintravelagent cascade;
+drop user employeetravelagent cascade;
+
+create user admintravelagent identified by admin;
+grant connect, UNLIMITED TABLESPACE, resource to admintravelagent;
+
+create user employeetravelagent identified by employee;
+grant connect to employeetravelagent;
+
 -- -----------------------------------------------------
 -- Table customer
 -- -----------------------------------------------------
 CREATE TABLE customer (
-  customer_id NUMBER(10) NOT NULL,
-  first_name VARCHAR2(100) NOT NULL,
-  last_name VARCHAR2(100) NOT NULL,
-  address VARCHAR2(100) NOT NULL,
-  phone VARCHAR2(20) NOT NULL,
-  PRIMARY KEY (customer_id))
+  customer_id NUMBER(10),
+  first_name VARCHAR2(100) CONSTRAINT NN_CUSTOMER_FIRST_NAME NOT NULL,
+  last_name VARCHAR2(100) CONSTRAINT NN_CUSTOMER_LAST_NAME NOT NULL,
+  address VARCHAR2(100) CONSTRAINT NN_CUSTOMER_ADDRESS NOT NULL,
+  phone VARCHAR2(20) CONSTRAINT NN_CUSTOMER_PHONE NOT NULL,
+  CONSTRAINT PRIMARY KEY (customer_id))
 ;
 
 
@@ -15,11 +26,11 @@ CREATE TABLE customer (
 -- Table agent
 -- -----------------------------------------------------
 CREATE TABLE agent (
-  agent_id NUMBER(10) NOT NULL,
-  name VARCHAR2(100) NOT NULL,
-  username VARCHAR2(100) NOT NULL,
-  password VARCHAR2(100) NOT NULL,
-  PRIMARY KEY (agent_id))
+  agent_id NUMBER(10),
+  name VARCHAR2(100) CONSTRAINT NN_AGENT_NAME NOT NULL,
+  username VARCHAR2(100) CONSTRAINT NN_AGENT_USERNAME NOT NULL,
+  password VARCHAR2(100) CONSTRAINT NN_AGENT_PASSWORD NOT NULL,
+  CONSTRAINT PRIMARY KEY (agent_id))
 ;
 
 
@@ -27,14 +38,12 @@ CREATE TABLE agent (
 -- Table reservation
 -- -----------------------------------------------------
 CREATE TABLE reservation (
-  reservation_id NUMBER(10) NOT NULL,
-  customer_id NUMBER(10) NOT NULL,
-  agent_id NUMBER(10) NOT NULL,
-  check_in DATE NOT NULL,
-  check_out DATE NOT NULL,
-  PRIMARY KEY (reservation_id)
-  CREATE INDEX fk_reservation_customer1_idx ON reservation (customer_id ASC)
-  CREATE INDEX fk_reservation_agent1_idx ON reservation (agent_id ASC),
+  reservation_id NUMBER(10),
+  customer_id NUMBER(10) CONSTRAINT NN_AGENT_CUSTOMER_ID NOT NULL,
+  agent_id NUMBER(10) CONSTRAINT NN_AGENT_AGENT_ID NOT NULL,
+  check_in DATE CONSTRAINT NN_AGENT_CHECK_IN NOT NULL,
+  check_out DATE CONSTRAINT NN_AGENT_CHECK_OUT NOT NULL,
+  CONSTRAINT PRIMARY KEY (reservation_id)
   CONSTRAINT fk_reservation_customer1
     FOREIGN KEY (customer_id)
     REFERENCES customer (customer_id)
@@ -50,13 +59,12 @@ CREATE TABLE reservation (
 -- Table reservation_detail
 -- -----------------------------------------------------
 CREATE TABLE reservation_detail (
-  reservation_detail_id NUMBER(10) NOT NULL,
-  reservation_id NUMBER(10) NOT NULL,
-  room_type VARCHAR2(45) NOT NULL,
-  qty NUMBER(3) CHECK (qty > 0) NOT NULL,
-  price NUMBER(10) CHECK (price > 0) NOT NULL,
-  PRIMARY KEY (reservation_detail_id)
-  CREATE INDEX fk_reservation_detail_reservation_idx ON reservation_detail (reservation_id ASC),
+  reservation_detail_id NUMBER(10),
+  reservation_id NUMBER(10) CONSTRAINT NN_AGENT_RESERVATION_ID NOT NULL,
+  room_type VARCHAR2(45) CONSTRAINT NN_AGENT_ROOM_TYPE NOT NULL,
+  qty NUMBER(3) CHECK (qty > 0) CONSTRAINT NN_AGENT_QTY NOT NULL,
+  price NUMBER(10) CHECK (price > 0) CONSTRAINT NN_AGENT_PRICE NOT NULL,
+  CONSTRAINT PRIMARY KEY (reservation_detail_id)
   CONSTRAINT fk_reservation_detail_reservation
     FOREIGN KEY (reservation_id)
     REFERENCES reservation (reservation_id)
