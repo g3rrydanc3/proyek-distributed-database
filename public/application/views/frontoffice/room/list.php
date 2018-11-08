@@ -16,10 +16,6 @@
 				  </tr>
 				</thead>
 				<tbody>
-				<?
-					//foreach ($rooms as $rm) {
-						// $emp->username
-				?>
 				  <!--<tr>
 				    <td> <?//=$rm->room_type ?> </td>
 				    <td> <?//=$rm->min_id ?> </td>
@@ -30,7 +26,6 @@
 				    	<a href="/room/delete/<?//=$rm->min_id?>/<?//=$rm->max_id?>" onclick="return confirm('Are you sure ?')" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a>
 				    </td>
 				  </tr>-->
-				<? //} ?>
 				</tbody>
 			</table>
 		</div>

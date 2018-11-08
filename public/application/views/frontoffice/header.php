@@ -40,7 +40,8 @@
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                   class="icon-user"></i> <?= "IMMANUEL"; ?> (<?="NUEL"?>) <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="/login/logout">Logout</a></li>
+                  
+                    <li><a href="<?= site_url(); ?>/auth/logout/frontoffice">Logout</a></li>
                   </ul>
                 </li>
                 <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?="FrontOffice"?></a>

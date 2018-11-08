@@ -100,10 +100,9 @@ class Room extends CI_Controller {
 	public function index()
 	{
 		//$rooms = $this->room_m->get_rooms();
-
 		//$viewdata = array('rooms' => $rooms);
 		$viewdata = "";
-		$data = array('title' => 'Rooms - DB Hotel Management System', 'page' => 'room');
+		$data = array('title' => 'Rooms - Vixion', 'page' => 'room');
 		$this->load->view('frontoffice/header', $data);
 		$this->load->view('frontoffice/room/list',$viewdata);
 		$this->load->view('frontoffice/footer');

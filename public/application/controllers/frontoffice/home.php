@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Home extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -43,7 +43,7 @@ class Welcome extends CI_Controller {
 			'next_week_freq' => $next_week_freq
 		);*/
 		$viewdata = " ";
-		$this->load->view('frontoffice/welcome_message', $viewdata);
+		$this->load->view('frontoffice/home', $viewdata);
 		$this->load->view('frontoffice/footer');
 		//$this->load->view('frontoffice/footer', array("next_week_freq"=>$next_week_freq));
 		$this->session->set_userdata('show_guide',true);
