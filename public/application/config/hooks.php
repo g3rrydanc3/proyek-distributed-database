@@ -11,3 +11,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |	https://codeigniter.com/user_guide/general/hooks.html
 |
 */
+$hook['pre_system'][] = array(
+	'class' => '',
+	'function' => 'load_core_controller',
+	'filename' => 'load_core_controller.php',
+	'filepath' => 'hooks'
+);
