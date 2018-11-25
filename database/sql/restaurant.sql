@@ -8,6 +8,9 @@ grant connect, UNLIMITED TABLESPACE, resource to adminrestaurant;
 
 create user employeerestaurant identified by employee;
 grant connect to employeerestaurant;
+
+connect adminrestaurant/admin@restaurant
+
 -- -----------------------------------------------------
 -- Table employee
 -- -----------------------------------------------------
@@ -17,7 +20,7 @@ CREATE TABLE employee (
   last_name VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_LAST_NAME NOT NULL,
   username VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_USERNAME NOT NULL,
   password VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_PASSWORD NOT NULL,
-  CONSTRAINT PRIMARY KEY (employee_id),
+  CONSTRAINT PK_EMPLOYEE_EMPLOYEE_ID PRIMARY KEY (employee_id),
   CONSTRAINT username_UNIQUE UNIQUE  (username))
 ;
 
@@ -30,7 +33,7 @@ CREATE TABLE menu (
   name VARCHAR2(100) CONSTRAINT NN_MENU_NAME NOT NULL,
   menu_type VARCHAR2(100) CONSTRAINT NN_MENU_MENU_TYPE NOT NULL,
   price NUMBER(10) CONSTRAINT NN_MENU_PRICE NOT NULL,
-  CONSTRAINT PRIMARY KEY (id))
+  CONSTRAINT PK_MENU_ID PRIMARY KEY (id))
 ;
 
 
@@ -45,7 +48,7 @@ CREATE TABLE menu_bill (
   total VARCHAR2(45) CONSTRAINT NN_MENU_BILL_TOTAL NOT NULL,
   bill_date TIMESTAMP CONSTRAINT NN_MENU_BILL_BILL_DATE NOT NULL,
   employee_id NUMBER(10) CONSTRAINT NN_MENU_BILL_EMPLOYEE_ID NOT NULL,
-  CONSTRAINT PRIMARY KEY (id)
+  CONSTRAINT PK_MENU_BILL_ID PRIMARY KEY (id),
   CONSTRAINT fk_menu_bill_employee
     FOREIGN KEY (employee_id)
     REFERENCES employee (employee_id)
@@ -58,9 +61,9 @@ CREATE TABLE menu_bill (
 -- -----------------------------------------------------
 CREATE TABLE menu_bill_detail (
   id NUMBER(10) ,
-  menu_bill_id NUMBER(10) CONSTRAINT NN_MENU_BILL_DETAIL_MENU_BILL_ID NOT NULL,
-  menu_id NUMBER(10) CONSTRAINT NN_MENU_BILL_DETAIL_MENU_ID NOT NULL,
-  CONSTRAINT PRIMARY KEY (id)
+  menu_bill_id NUMBER(10) CONSTRAINT NN_MENU_BILL_DETAIL_1 NOT NULL,
+  menu_id NUMBER(10) CONSTRAINT NN_MENU_BILL_DETAIL_2 NOT NULL,
+  CONSTRAINT PK_MENU_BILL_DETAIL_ID PRIMARY KEY (id),
   CONSTRAINT fk_menu_bill_detail_menu_bill1
     FOREIGN KEY (menu_bill_id)
     REFERENCES menu_bill (id)
