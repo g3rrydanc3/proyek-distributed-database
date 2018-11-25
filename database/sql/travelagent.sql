@@ -9,6 +9,8 @@ grant connect, UNLIMITED TABLESPACE, resource to admintravelagent;
 create user employeetravelagent identified by employee;
 grant connect to employeetravelagent;
 
+connect admintravelagent/admin@travelagent
+
 -- -----------------------------------------------------
 -- Table customer
 -- -----------------------------------------------------
@@ -18,7 +20,7 @@ CREATE TABLE customer (
   last_name VARCHAR2(100) CONSTRAINT NN_CUSTOMER_LAST_NAME NOT NULL,
   address VARCHAR2(100) CONSTRAINT NN_CUSTOMER_ADDRESS NOT NULL,
   phone VARCHAR2(20) CONSTRAINT NN_CUSTOMER_PHONE NOT NULL,
-  CONSTRAINT PRIMARY KEY (customer_id))
+  CONSTRAINT PK_CUSTOMER_CUSTOMER_ID PRIMARY KEY (customer_id))
 ;
 
 
@@ -30,7 +32,7 @@ CREATE TABLE agent (
   name VARCHAR2(100) CONSTRAINT NN_AGENT_NAME NOT NULL,
   username VARCHAR2(100) CONSTRAINT NN_AGENT_USERNAME NOT NULL,
   password VARCHAR2(100) CONSTRAINT NN_AGENT_PASSWORD NOT NULL,
-  CONSTRAINT PRIMARY KEY (agent_id))
+  CONSTRAINT PK_AGENT_AGENT_ID PRIMARY KEY (agent_id))
 ;
 
 
@@ -43,7 +45,7 @@ CREATE TABLE reservation (
   agent_id NUMBER(10) CONSTRAINT NN_AGENT_AGENT_ID NOT NULL,
   check_in DATE CONSTRAINT NN_AGENT_CHECK_IN NOT NULL,
   check_out DATE CONSTRAINT NN_AGENT_CHECK_OUT NOT NULL,
-  CONSTRAINT PRIMARY KEY (reservation_id)
+  CONSTRAINT PK_RESERVATION_RESERVATION_ID PRIMARY KEY (reservation_id),
   CONSTRAINT fk_reservation_customer1
     FOREIGN KEY (customer_id)
     REFERENCES customer (customer_id)
@@ -64,8 +66,8 @@ CREATE TABLE reservation_detail (
   room_type VARCHAR2(45) CONSTRAINT NN_AGENT_ROOM_TYPE NOT NULL,
   qty NUMBER(3) CHECK (qty > 0) CONSTRAINT NN_AGENT_QTY NOT NULL,
   price NUMBER(10) CHECK (price > 0) CONSTRAINT NN_AGENT_PRICE NOT NULL,
-  CONSTRAINT PRIMARY KEY (reservation_detail_id)
-  CONSTRAINT fk_reservation_detail_reservation
+  CONSTRAINT PK_RESERVATION_DETAIL_1 PRIMARY KEY (reservation_detail_id),
+  CONSTRAINT fk_reservation_detail_1
     FOREIGN KEY (reservation_id)
     REFERENCES reservation (reservation_id)
    )
