@@ -4,8 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 abstract class MY_Frontoffice extends MY_Controller {
     function __construct() {
         parent::__construct();
-        
-        $this->load->database('frontoffice');
         $this->dataView['title'] = $this->dataView['hotel_name'];
     }
 }

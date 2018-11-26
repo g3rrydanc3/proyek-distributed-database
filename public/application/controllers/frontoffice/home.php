@@ -26,17 +26,6 @@ class Home extends MY_Frontoffice {
 
 	public function index()
 	{
-		$query = $this->db->query("select table_name from user_tables");
-
-		var_dump($query->result());
-
-		//UNTUK QUERY BUILDER, TAMBAHKAN PARAM KE2 FALSE AGAR TIDAK DI TAMBAHI "", JIKA TIDAK BISA QUERY MANUAL
-		$query = $this->db->select("table_name from user_tables", false);
-
-		var_dump($query->get());
-
-		
-
 		$this->check_login();
 
 		//$today_stats = $this->report_m->today_stats();
