@@ -44,9 +44,6 @@
                   </ul>
                 </li>
               </ul>
-              <form class="navbar-search pull-right" action="/search" method="POST">
-                <input type="text" name="customer" class="search-query" placeholder="Search Customer">
-              </form>
           </div>
           <!--/.nav-collapse --> 
       <? } ?>

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="span12">
-			<a href="<?= site_url(); ?>/frontoffice/customer/add/reservation" class="btn btn-small btn-primary"><i class="btn-icon-only icon-ok"></i>Add Customer</a>
+			<a href="<?= site_url(); ?>/frontoffice/customer/add/reservation" class="btn btn-small btn-primary"><i class="btn-icon-only icon-plus"></i>Add Customer</a>
 			<br><br>
 			<table class="table table-striped table-bordered">
 				<thead>
