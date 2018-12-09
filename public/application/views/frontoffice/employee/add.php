@@ -5,12 +5,12 @@
 		<form action="/room/add" method="post">
 		
 			<h1>Add Rooms</h1>		
-<? if(isset($error)) {?>
-			<div class="alert alert-danger">
+<? //if(isset($error)) {?>
+	<!--		<div class="alert alert-danger">
               <button type="button" class="close" data-dismiss="alert">×</button>
               <strong>Error!</strong> <?//=$error?>
-            </div>
-<? } ?>
+            </div>-->
+<? //} ?>
 
 			<div class="add-fields">
 				<div class="field">

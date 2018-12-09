@@ -61,7 +61,7 @@ class Reservation extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->check_login();
+		//$this->check_login();
 
 		//$room_types = $this->room_m->get_room_types();
 		//$viewdata = array('room_types' => $room_types);

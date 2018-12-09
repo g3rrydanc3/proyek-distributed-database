@@ -52,7 +52,7 @@ class Auth extends MY_Controller {
 	private function redirect($module){
 		switch ($module) {
 			case 'frontoffice':
-				redirect(site_url('frontoffice/home'));
+				redirect(site_url('frontoffice/reservation'));
 				break;
 			case 'laundry':
 				redirect(site_url('laundry/home'));

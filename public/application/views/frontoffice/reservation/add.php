@@ -11,18 +11,18 @@
             <form action="/reservation/check" method="post">
             
               <h1>Search for Rooms</h1>    
-      <? if(isset($error)) {?>
-            <div class="alert alert-danger">
+      <? //if(isset($error)) {?>
+           <!-- <div class="alert alert-danger">
               <button type="button" class="close" data-dismiss="alert">×</button>
-              <!--<strong>Error!</strong> <?//=$error?>-->
-            </div>
-      <? } ?>
-      <? if(isset($success)) {?>
-            <div class="alert alert-success">
+              <strong>Error!</strong> <?//=$error?>
+            </div>-->
+      <? //} ?>
+      <? //if(isset($success)) {?>
+            <!--<div class="alert alert-success">
               <button type="button" class="close" data-dismiss="alert">×</button>
-              <!--<strong>Success!</strong> <?//=$success?>-->
-            </div>
-      <? } ?>
+              <strong>Success!</strong> <?//=$success?>
+            </div>-->
+      <? //} ?>
       <div class="add-fields">
 
         <div class="field">
@@ -60,29 +60,40 @@
         
       </div> <!-- .actions -->
       
-      
-      
     </form>
     
   </div> <!-- /content -->
 </div> <!-- /account-container -->
 </div>
-<style type="text/css">.account-container{margin-top: 10px;padding-bottom: 15px;}</style>
-      <div class="span7">
-        <!-- /widget -->
-        <div class="widget widget-nopad">
-          <div class="widget-header"> <i class="icon-list-alt"></i>
-            <h3> Reservation</h3>
-          </div>
-          <!-- /widget-header -->
-          <div class="widget-content">
-            <div id='calendar' class='calendar'>
-            </div>
-          </div>
-          <!-- /widget-content --> 
-        </div>
-        <!-- /widget -->
-      </div>
+<div class="span7">
+			<a href="<?php  echo site_url() ?>/frontoffice/room/add" class="btn btn-small btn-primary"><i class="btn-icon-only icon-plus"></i>Add Rooms</a>
+			<br><br>
+			<table class="table table-striped table-bordered">
+				<thead>
+				  <tr>
+				    <th> Room No </th>
+				    <th> Customer </th>
+            <th> CheckIn </th>
+            <th> CheckOut </th>
+				    <th> Status </th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <!--<tr>
+				    <td> <?//=$rm->room_type ?> </td>
+				    <td> <?//=$rm->min_id ?> </td>
+				    <td> <?//=$rm->max_id?> </td>
+				    <td> <?//=($rm->max_id-$rm->min_id+1) ?> </td>
+				    <td class="td-actions">
+				    	<a href="/room/edit/<?//=$rm->room_type?>/<?//=$rm->min_id?>/<?//=$rm->max_id?>" class="btn btn-small btn-primary"><i class="btn-icon-only icon-edit"> </i></a>
+				    	<a href="/room/delete/<?//=$rm->min_id?>/<?//=$rm->max_id?>" onclick="return confirm('Are you sure ?')" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a>
+				    </td>
+				  </tr>-->
+				</tbody>
+			</table>
+		</div>
+  <style type="text/css">.account-container{margin-top: 10px;padding-bottom: 15px;}</style>
+ 
     </div>
   </div>
 </div>

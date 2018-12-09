@@ -5,12 +5,12 @@
 		<form action="/room-type/add" method="post">
 		
 			<h1>Add Room Type</h1>		
-<? if(isset($error)) {?>
-			<div class="alert alert-danger">
+			<? //if(isset($error)) {?>
+			<!--<div class="alert alert-danger">
               <button type="button" class="close" data-dismiss="alert">×</button>
               <strong>Error!</strong> <?//=$error?>
-            </div>
-<? } ?>
+            </div>-->
+			<? //} ?>
 			<div class="add-fields">
 
 				<div class="field">
@@ -32,7 +32,7 @@
 				<div class="field">
 					<label for="room_capacity">Capacity:</label>
 					<input type="number" min="1" id="capacity" name="capacity" value="" placeholder="Capacity"/>
-				</div--> <!-- /field -->
+				</div> <!-- /field -->
 
 			</div> <!-- /login-fields -->
 			
