@@ -90,10 +90,11 @@ begin
 		end if;
 	end if;
 	:new.id := new_id;
-	:new.bill_date := to_char(sysdate, 'ddmmyy')||to_char(sysdate, 'ddmmyy');
+	:new.bill_date := to_char(sysdate, 'ddmmyy');
 end;
 /
 show err;
+
 
 insert into menu_bill (room_no, table_no, capacity, total, employee_id) VALUES (01,1,2,200000,0001);
 insert into menu_bill (room_no, table_no, capacity, total, employee_id) VALUES (02,2,1,450000,0001);
