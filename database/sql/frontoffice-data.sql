@@ -75,6 +75,20 @@ insert into room (type_id, status) values (1, 1);
 insert into room (type_id, status) values (2, 0);
 insert into room (type_id, status) values (3, 0);
 insert into room (type_id, status) values (4, 1);
+insert into room (type_id, status) values (5, 0);
+insert into room (type_id, status) values (6, 1);
+
+insert into room (type_id, status) values (1, 1);
+insert into room (type_id, status) values (2, 1);
+insert into room (type_id, status) values (3, 1);
+insert into room (type_id, status) values (4, 1);
+insert into room (type_id, status) values (5, 1);
+insert into room (type_id, status) values (6, 0);
+
+insert into room (type_id, status) values (1, 1);
+insert into room (type_id, status) values (2, 1);
+insert into room (type_id, status) values (3, 1);
+insert into room (type_id, status) values (4, 1);
 insert into room (type_id, status) values (5, 1);
 insert into room (type_id, status) values (6, 1);
 
@@ -85,18 +99,11 @@ insert into room (type_id, status) values (4, 1);
 insert into room (type_id, status) values (5, 1);
 insert into room (type_id, status) values (6, 1);
 
-insert into room (type_id, status) values (1, 0);
-insert into room (type_id, status) values (2, 0);
-insert into room (type_id, status) values (3, 0);
-insert into room (type_id, status) values (4, 0);
-insert into room (type_id, status) values (5, 0);
-insert into room (type_id, status) values (6, 0);
-
-insert into room (type_id, status) values (1, 0);
+insert into room (type_id, status) values (1, 1);
 insert into room (type_id, status) values (2, 1);
-insert into room (type_id, status) values (3, 0);
+insert into room (type_id, status) values (3, 1);
 insert into room (type_id, status) values (4, 1);
-insert into room (type_id, status) values (5, 0);
+insert into room (type_id, status) values (5, 1);
 insert into room (type_id, status) values (6, 1);
 
 insert into room (type_id, status) values (1, 1);
@@ -106,18 +113,11 @@ insert into room (type_id, status) values (4, 1);
 insert into room (type_id, status) values (5, 1);
 insert into room (type_id, status) values (6, 1);
 
-insert into room (type_id, status) values (1, 0);
-insert into room (type_id, status) values (2, 0);
-insert into room (type_id, status) values (3, 0);
-insert into room (type_id, status) values (4, 0);
-insert into room (type_id, status) values (5, 0);
-insert into room (type_id, status) values (6, 0);
-
 insert into room (type_id, status) values (1, 1);
 insert into room (type_id, status) values (2, 1);
-insert into room (type_id, status) values (3, 0);
+insert into room (type_id, status) values (3, 1);
 insert into room (type_id, status) values (4, 1);
-insert into room (type_id, status) values (5, 0);
+insert into room (type_id, status) values (5, 1);
 insert into room (type_id, status) values (6, 1);
 
 ------------------------------------------------------------------------------------------------
@@ -127,13 +127,13 @@ on customer
 for each row
 declare
 	last_id number(5);
-	new_id number(5);
+	new_id varchar2(5);
 begin
-	select max(customer_id) into last_id from customer;
+	select max(substr(customer_id,3,3)) into last_id from customer;
 	if last_id is null then
-		new_id := 1;
+		new_id := 'CU001';
 	else
-		new_id := last_id + 1;
+		new_id := 'CU' || lpad(to_number(last_id) + 1, 3, '0');
 	end if;
 	:new.customer_id := new_id;
 end;
@@ -167,22 +167,11 @@ end;
 /
 show err;
 
-insert into bill (customer_id, room_no, total) values (1, );
-
-CREATE TABLE bill (
-  bill_id NUMBER(10) CONSTRAINT pk_bill_id PRIMARY KEY,
-  customer_id NUMBER(10) CONSTRAINT nn_bill_customer_id NOT NULL,
-  room_no NUMBER(10) CONSTRAINT nn_bill_room_no NOT NULL,
-  total NUMBER(10) CONSTRAINT nn_bill_total NOT NULL,
-  CONSTRAINT fk_bill_customer1
-    FOREIGN KEY (customer_id)
-    REFERENCES customer (customer_id)
-   ,
-  CONSTRAINT fk_bill_room1
-    FOREIGN KEY (room_no)
-    REFERENCES room (room_no)
-   )
-;
+insert into bill (customer_id, total) values ('CU001', 1050000);
+insert into bill (customer_id, total) values ('CU002', 600000);
+insert into bill (customer_id, total) values ('CU003', 800000);
+insert into bill (customer_id, total) values ('CU004', 250000);
+insert into bill (customer_id, total) values ('CU005', 1550000);
 
 ---------------------------------------------------------------------------------------------------
 create or replace trigger tInsEmployee
@@ -191,13 +180,13 @@ on employee
 for each row
 declare
 	last_id number(5);
-	new_id number(5);
+	new_id varchar2(5);
 begin
-	select max(employee_id) into last_id from employee;
+	select max(substr(employee_id,3,3)) into last_id from employee;
 	if last_id is null then
-		new_id := 1;
+		new_id := 'EM001';
 	else
-		new_id := last_id + 1;
+		new_id := 'EM' || lpad(to_number(last_id) + 1, 3, '0');
 	end if;
 	:new.employee_id := new_id;
 end;
@@ -211,78 +200,96 @@ insert into employee (first_name, last_name, username, password) values ('Ann', 
 insert into employee (first_name, last_name, username, password) values ('Aaron', 'Davis', 'adavis', 'IPYdVdmC1G');
 
 ----------------------------------------------------------------------------------------------------
-
-
--- -----------------------------------------------------
--- Table payment
--- -----------------------------------------------------
-CREATE TABLE payment (
-  payment_id NUMBER(10) CONSTRAINT pk_payment_id PRIMARY KEY,
-  employee_id NUMBER(10) CONSTRAINT nn_payment_employee_id NOT NULL,
-  bill_id NUMBER(10) CONSTRAINT nn_payment_bill_id NOT NULL,
-  customer_id NUMBER(10) CONSTRAINT nn_payment_customer_id NOT NULL,
-  payment_date TIMESTAMP CONSTRAINT nn_payment_date NOT NULL,
-  payment_method VARCHAR2(100) CONSTRAINT nn_payment_method NOT NULL,
-  card_no NUMBER(10) NULL,
-  CONSTRAINT fk_payment_customer1
-    FOREIGN KEY (customer_id)
-    REFERENCES customer (customer_id)
-   ,
-  CONSTRAINT fk_payment_bill1
-    FOREIGN KEY (bill_id)
-    REFERENCES bill (bill_id)
-   ,
-  CONSTRAINT fk_payment_employee1
-    FOREIGN KEY (employee_id)
-    REFERENCES employee (employee_id)
-   )
-;
-
-
--- -----------------------------------------------------
--- Table service
--- -----------------------------------------------------
-CREATE TABLE service (
-  service_id NUMBER(10) CONSTRAINT pk_service_id PRIMARY KEY,
-  room_no NUMBER(10) CONSTRAINT nn_service_room_no NOT NULL,
-  service_type VARCHAR2(45) CONSTRAINT nn_service_type NOT NULL,
-  service_date TIMESTAMP CONSTRAINT nn_service_date NOT NULL,
-  total NUMBER(10) CONSTRAINT nn_service_total1e NOT NULL,
-  CONSTRAINT fk_service_room1
-    FOREIGN KEY (room_no)
-    REFERENCES room (room_no)
-   )
-;
-
-
--- -----------------------------------------------------
--- Table bill_detail
--- -----------------------------------------------------
-CREATE TABLE bill_detail (
-  bill_detail_id NUMBER(10) CONSTRAINT pk_bill_detail_id PRIMARY KEY,
-  payment_id NUMBER(10) CONSTRAINT nn_service_id NOT NULL,
-  service_id NUMBER(10) CONSTRAINT nn_ NOT NULL,
-  CONSTRAINT fk_bill_detail_payment1
-    FOREIGN KEY (payment_id)
-    REFERENCES payment (payment_id)
-   ,
-  CONSTRAINT fk_bill_detail_service1
-    FOREIGN KEY (service_id)
-    REFERENCES service (service_id)
-   )
-;
-
-set serveroutput on
-BEGIN 
-	FOR x IN (SELECT * FROM tab)
-	LOOP
-		if lower(x.tname) != 'employee' then
-			dbms_output.put_line('SELECT, INSERT, UPDATE ' || x.tname);
-			EXECUTE IMMEDIATE 'GRANT SELECT, INSERT, UPDATE ON ' || x.tname || ' TO employeefrontoffice';
-		else
-			dbms_output.put_line('SELECT ' || x.tname);
-			EXECUTE IMMEDIATE 'GRANT SELECT ON ' || x.tname || ' TO employeefrontoffice';
-		end if;
-	END LOOP;
-END; 
+create or replace trigger tInsPayment
+before insert
+on payment
+for each row
+declare
+	last_id varchar(3);
+	new_id varchar2(10);
+begin
+	select max(substr(payment_id, 8, 3)) into last_id from payment where substr(payment_id, 1,7) = 'P' || to_char(sysdate, 'ddmmyy') ;
+	if last_id is null then
+		new_id := 'P' || to_char(sysdate, 'ddmmyy') || '001';
+	else
+		new_id := 'P' || to_char(sysdate, 'ddmmyy') || lpad(to_number(last_id) + 1, 3, 0);
+	end if;
+	:new.payment_id := new_id;
+end;
 /
+show err;
+
+insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method) values ('EM001', '1212180001', 'CU001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method) values ('EM001', '1212180001', 'CU001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM001', '1212180002', 'CU002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
+insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM001', '1212180002', 'CU002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
+insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM001', '1212180003', 'CU003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
+insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM001', '1212180003', 'CU003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
+insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method) values ('EM005', '1212180004', 'CU004', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM002', '1212180005', 'CU005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM002', '1212180005', 'CU005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM002', '1212180005', 'CU005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+
+----------------------------------------------------------------------------------------------------
+create or replace trigger tInsService
+before insert
+on service
+for each row
+declare
+	last_id varchar(3);
+	new_id varchar2(10);
+begin
+	select max(substr(service_id, 8, 3)) into last_id from service where substr(service_id, 1,7) = 'S' || to_char(sysdate, 'ddmmyy') ;
+	if last_id is null then
+		new_id := 'S' || to_char(sysdate, 'ddmmyy') || '001';
+	else
+		new_id := 'S' || to_char(sysdate, 'ddmmyy') || lpad(to_number(last_id) + 1, 3, 0);
+	end if;
+	:new.service_id := new_id;
+end;
+/
+show err;
+
+insert into service (room_no, service_type, service_date, total) values (605, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 800000);
+insert into service (room_no, service_type, service_date, total) values (101, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 250000);
+insert into service (room_no, service_type, service_date, total) values (103, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 250000);
+insert into service (room_no, service_type, service_date, total) values (203, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 350000);
+insert into service (room_no, service_type, service_date, total) values (201, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 350000);
+insert into service (room_no, service_type, service_date, total) values (304, 'front officce', to_date('1212-2018', 'dd-mm-yyyy'), 450000);
+insert into service (room_no, service_type, service_date, total) values (102, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 250000);
+insert into service (room_no, service_type, service_date, total) values (504, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 650000);
+insert into service (room_no, service_type, service_date, total) values (401, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 550000);
+insert into service (room_no, service_type, service_date, total) values (204, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 350000);
+
+----------------------------------------------------------------------------------------------------
+create or replace trigger tInsBillDetail
+before insert
+on bill_detail
+for each row
+declare
+	last_id varchar(3);
+	new_id varchar2(10);
+begin
+	select max(substr(bill_detail_id, 8, 3)) into last_id from bill_detail where substr(bill_detail_id, 1,7) = 'B' || to_char(sysdate, 'ddmmyy') ;
+	if last_id is null then
+		new_id := 'B' || to_char(sysdate, 'ddmmyy') || '001';
+	else
+		new_id := 'B' || to_char(sysdate, 'ddmmyy') || lpad(to_number(last_id) + 1, 3, 0);
+	end if;
+	:new.bill_detail_id := new_id;
+end;
+/
+show err;
+
+insert into bill_detail (payment_id, service_id) values ('P121218001', 'S121218001');
+insert into bill_detail (payment_id, service_id) values ('P121218002', 'S121218002');
+insert into bill_detail (payment_id, service_id) values ('P121218003', 'S121218003');
+insert into bill_detail (payment_id, service_id) values ('P121218004', 'S121218004');
+insert into bill_detail (payment_id, service_id) values ('P121218005', 'S121218005');
+insert into bill_detail (payment_id, service_id) values ('P121218006', 'S121218006');
+insert into bill_detail (payment_id, service_id) values ('P121218007', 'S121218007');
+insert into bill_detail (payment_id, service_id) values ('P121218008', 'S121218008');
+insert into bill_detail (payment_id, service_id) values ('P121218009', 'S121218009');
+insert into bill_detail (payment_id, service_id) values ('P121218010', 'S121218010');
+
+commit;

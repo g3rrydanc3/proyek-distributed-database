@@ -52,7 +52,7 @@ CREATE TABLE room (
 -- Table customer
 -- -----------------------------------------------------
 CREATE TABLE customer (
-  customer_id NUMBER(10) CONSTRAINT pk_customer_id PRIMARY KEY,
+  customer_id VARCHAR2(5) CONSTRAINT pk_customer_id PRIMARY KEY,
   first_name VARCHAR2(100) CONSTRAINT nn_customer_first_name NOT NULL,
   last_name VARCHAR2(100) CONSTRAINT nn_customer_last_name NOT NULL,
   address VARCHAR2(100) CONSTRAINT nn_customer_address NOT NULL,
@@ -65,18 +65,12 @@ CREATE TABLE customer (
 -- Table bill
 -- -----------------------------------------------------
 CREATE TABLE bill (
-  bill_id NUMBER(10) CONSTRAINT pk_bill_id PRIMARY KEY,
-  customer_id NUMBER(10) CONSTRAINT nn_bill_customer_id NOT NULL,
-  room_no NUMBER(10) CONSTRAINT nn_bill_room_no NOT NULL,
+  bill_id VARCHAR2(10) CONSTRAINT pk_bill_id PRIMARY KEY,
+  customer_id VARCHAR2(5) CONSTRAINT nn_bill_customer_id NOT NULL,
   total NUMBER(10) CONSTRAINT nn_bill_total NOT NULL,
   CONSTRAINT fk_bill_customer1
     FOREIGN KEY (customer_id)
-    REFERENCES customer (customer_id)
-   ,
-  CONSTRAINT fk_bill_room1
-    FOREIGN KEY (room_no)
-    REFERENCES room (room_no)
-   )
+    REFERENCES customer (customer_id))
 ;
 
 
@@ -84,7 +78,7 @@ CREATE TABLE bill (
 -- Table employee
 -- -----------------------------------------------------
 CREATE TABLE employee (
-  employee_id NUMBER(10) CONSTRAINT pk_employee_id PRIMARY KEY,
+  employee_id VARCHAR2(5) CONSTRAINT pk_employee_id PRIMARY KEY,
   first_name VARCHAR2(100) CONSTRAINT nn_employee_first_name NOT NULL,
   last_name VARCHAR2(100) CONSTRAINT nn_employee_last_name NOT NULL,
   username VARCHAR2(100) CONSTRAINT nn_employee_username NOT NULL,
@@ -97,13 +91,13 @@ CREATE TABLE employee (
 -- Table payment
 -- -----------------------------------------------------
 CREATE TABLE payment (
-  payment_id NUMBER(10) CONSTRAINT pk_payment_id PRIMARY KEY,
-  employee_id NUMBER(10) CONSTRAINT nn_payment_employee_id NOT NULL,
-  bill_id NUMBER(10) CONSTRAINT nn_payment_bill_id NOT NULL,
-  customer_id NUMBER(10) CONSTRAINT nn_payment_customer_id NOT NULL,
+  payment_id VARCHAR2(10) CONSTRAINT pk_payment_id PRIMARY KEY,
+  employee_id VARCHAR2(5) CONSTRAINT nn_payment_employee_id NOT NULL,
+  bill_id VARCHAR2(10) CONSTRAINT nn_payment_bill_id NOT NULL,
+  customer_id VARCHAR2(5) CONSTRAINT nn_payment_customer_id NOT NULL,
   payment_date TIMESTAMP CONSTRAINT nn_payment_date NOT NULL,
   payment_method VARCHAR2(100) CONSTRAINT nn_payment_method NOT NULL,
-  card_no NUMBER(10) NULL,
+  card_no VARCHAR(16) NULL,
   CONSTRAINT fk_payment_customer1
     FOREIGN KEY (customer_id)
     REFERENCES customer (customer_id)
@@ -123,7 +117,7 @@ CREATE TABLE payment (
 -- Table service
 -- -----------------------------------------------------
 CREATE TABLE service (
-  service_id NUMBER(10) CONSTRAINT pk_service_id PRIMARY KEY,
+  service_id VARCHAR2(10) CONSTRAINT pk_service_id PRIMARY KEY,
   room_no NUMBER(10) CONSTRAINT nn_service_room_no NOT NULL,
   service_type VARCHAR2(45) CONSTRAINT nn_service_type NOT NULL,
   service_date TIMESTAMP CONSTRAINT nn_service_date NOT NULL,
@@ -139,9 +133,9 @@ CREATE TABLE service (
 -- Table bill_detail
 -- -----------------------------------------------------
 CREATE TABLE bill_detail (
-  bill_detail_id NUMBER(10) CONSTRAINT pk_bill_detail_id PRIMARY KEY,
-  payment_id NUMBER(10) CONSTRAINT nn_service_id NOT NULL,
-  service_id NUMBER(10) CONSTRAINT nn_ NOT NULL,
+  bill_detail_id VARCHAR2(10) CONSTRAINT pk_bill_detail_id PRIMARY KEY,
+  payment_id VARCHAR2(10) CONSTRAINT nn_service_id NOT NULL,
+  service_id VARCHAR2(10) CONSTRAINT nn_ NOT NULL,
   CONSTRAINT fk_bill_detail_payment1
     FOREIGN KEY (payment_id)
     REFERENCES payment (payment_id)
