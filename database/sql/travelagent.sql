@@ -16,11 +16,9 @@ connect admintravelagent/admin@travelagent
 -- -----------------------------------------------------
 CREATE TABLE agent (
   agent_id NUMBER(10),
-  first_name VARCHAR2(100)  CONSTRAINT NN_EMPLOYEE_FIRST_NAME NOT NULL,
-  last_name VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_LAST_NAME NOT NULL,
+  name VARCHAR2(100)  CONSTRAINT NN_EMPLOYEE_FIRST_NAME NOT NULL,
   username VARCHAR2(100) CONSTRAINT NN_AGENT_USERNAME NOT NULL,
   password VARCHAR2(100) CONSTRAINT NN_AGENT_PASSWORD NOT NULL,
-  role VARCHAR2(10) CONSTRAINT nn_employee_role NOT NULL,
   CONSTRAINT PK_AGENT_AGENT_ID PRIMARY KEY (agent_id))
 ;
 
