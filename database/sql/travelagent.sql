@@ -27,15 +27,11 @@ CREATE TABLE agent (
 -- Table reservation
 -- -----------------------------------------------------
 CREATE TABLE reservation (
-  reservation_id VARCHAR2(5) CONSTRAINT PK_RESERVATION_RESERVATION_ID PRIMARY KEY (reservation_id),
+  reservation_id VARCHAR2(5) CONSTRAINT PK_RESERVATION_RESERVATION_ID PRIMARY KEY,
   customer_id NUMBER(10) CONSTRAINT NN_AGENT_CUSTOMER_ID NOT NULL,
   agent_id NUMBER(10) CONSTRAINT NN_AGENT_AGENT_ID NOT NULL,
   check_in DATE CONSTRAINT NN_AGENT_CHECK_IN NOT NULL,
   check_out DATE CONSTRAINT NN_AGENT_CHECK_OUT NOT NULL,
-  CONSTRAINT fk_reservation_customer1
-    FOREIGN KEY (customer_id)
-    REFERENCES customer (customer_id)
-   ,
   CONSTRAINT fk_reservation_agent1
     FOREIGN KEY (agent_id)
     REFERENCES agent (agent_id)
