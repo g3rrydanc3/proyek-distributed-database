@@ -20,12 +20,11 @@ connect adminlaundry/admin@laundry
 -- Table employee
 -- -----------------------------------------------------
 CREATE TABLE employee (
-  employee_id NUMBER(10),
+  employee_id VARCHAR2(5) CONSTRAINT PK_EMPLOYEE_1 PRIMARY KEY (employee_id),
   first_name VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_1 NOT NULL,
   last_name VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_2 NOT NULL,
   username VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_3 NOT NULL,
   password VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_4 NOT NULL,
-  CONSTRAINT PK_EMPLOYEE_1 PRIMARY KEY (employee_id),
   CONSTRAINT username_UNIQUE UNIQUE  (username))
 ;
 
@@ -34,13 +33,11 @@ CREATE TABLE employee (
 -- Table laundry_bill
 -- -----------------------------------------------------
 CREATE TABLE laundry_bill (
-  laundry_bill_id NUMBER(10),
+  laundry_bill_id VARCHAR2(10) CONSTRAINT PK_LAUNDRY_BILL_1 PRIMARY KEY (laundry_bill_id),
   room_no NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_1 NOT NULL,
   employee_id NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_2 NOT NULL,
   total NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_3 NOT NULL,
-  status NUMBER(3) CONSTRAINT NN_LAUNDRY_BILL_4 NOT NULL,
-  bill_date TIMESTAMP CONSTRAINT NN_LAUNDRY_BILL_5 NOT NULL,
-  CONSTRAINT PK_LAUNDRY_BILL_1 PRIMARY KEY (laundry_bill_id),
+  bill_date TIMESTAMP CONSTRAINT NN_LAUNDRY_BILL_4 NOT NULL,
   CONSTRAINT fk_laundry_1
     FOREIGN KEY (employee_id)
     REFERENCES employee (employee_id)

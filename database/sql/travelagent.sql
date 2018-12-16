@@ -12,19 +12,6 @@ grant connect to employeetravelagent;
 connect admintravelagent/admin@travelagent
 
 -- -----------------------------------------------------
--- Table customer
--- -----------------------------------------------------
-CREATE TABLE customer (
-  customer_id NUMBER(10),
-  first_name VARCHAR2(100) CONSTRAINT NN_CUSTOMER_FIRST_NAME NOT NULL,
-  last_name VARCHAR2(100) CONSTRAINT NN_CUSTOMER_LAST_NAME NOT NULL,
-  address VARCHAR2(100) CONSTRAINT NN_CUSTOMER_ADDRESS NOT NULL,
-  phone NUMBER(12) CONSTRAINT NN_CUSTOMER_PHONE NOT NULL,
-  CONSTRAINT PK_CUSTOMER_CUSTOMER_ID PRIMARY KEY (customer_id))
-;
-
-
--- -----------------------------------------------------
 -- Table agent
 -- -----------------------------------------------------
 CREATE TABLE agent (
@@ -40,12 +27,11 @@ CREATE TABLE agent (
 -- Table reservation
 -- -----------------------------------------------------
 CREATE TABLE reservation (
-  reservation_id NUMBER(14),
+  reservation_id VARCHAR2(5) CONSTRAINT PK_RESERVATION_RESERVATION_ID PRIMARY KEY (reservation_id),
   customer_id NUMBER(10) CONSTRAINT NN_AGENT_CUSTOMER_ID NOT NULL,
   agent_id NUMBER(10) CONSTRAINT NN_AGENT_AGENT_ID NOT NULL,
   check_in DATE CONSTRAINT NN_AGENT_CHECK_IN NOT NULL,
   check_out DATE CONSTRAINT NN_AGENT_CHECK_OUT NOT NULL,
-  CONSTRAINT PK_RESERVATION_RESERVATION_ID PRIMARY KEY (reservation_id),
   CONSTRAINT fk_reservation_customer1
     FOREIGN KEY (customer_id)
     REFERENCES customer (customer_id)
@@ -61,9 +47,9 @@ CREATE TABLE reservation (
 -- Table reservation_detail
 -- -----------------------------------------------------
 CREATE TABLE reservation_detail (
-  reservation_detail_id NUMBER(10),
-  reservation_id NUMBER(10) CONSTRAINT NN_AGENT_RESERVATION_ID NOT NULL,
-  room_type VARCHAR2(45) CONSTRAINT NN_AGENT_ROOM_TYPE NOT NULL,
+  reservation_detail_id VARCHAR2(5),
+  reservation_id VARCHAR2(5) CONSTRAINT NN_AGENT_RESERVATION_ID NOT NULL,
+  room_type NUMBER(10) CONSTRAINT NN_AGENT_ROOM_TYPE NOT NULL,
   qty NUMBER(3) CHECK (qty > 0) CONSTRAINT NN_AGENT_QTY NOT NULL,
   price NUMBER(10) CHECK (price > 0) CONSTRAINT NN_AGENT_PRICE NOT NULL,
   CONSTRAINT PK_RESERVATION_DETAIL_1 PRIMARY KEY (reservation_detail_id),

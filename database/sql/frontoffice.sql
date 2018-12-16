@@ -52,7 +52,7 @@ CREATE TABLE room (
 -- Table customer
 -- -----------------------------------------------------
 CREATE TABLE customer (
-  customer_id VARCHAR2(5) CONSTRAINT pk_customer_id PRIMARY KEY,
+  customer_id VARCHAR2(16) CONSTRAINT pk_customer_id PRIMARY KEY,
   first_name VARCHAR2(100) CONSTRAINT nn_customer_first_name NOT NULL,
   last_name VARCHAR2(100) CONSTRAINT nn_customer_last_name NOT NULL,
   address VARCHAR2(100) CONSTRAINT nn_customer_address NOT NULL,
@@ -66,11 +66,16 @@ CREATE TABLE customer (
 -- -----------------------------------------------------
 CREATE TABLE bill (
   bill_id VARCHAR2(10) CONSTRAINT pk_bill_id PRIMARY KEY,
+  employee_id VARCHAR2(5) CONSTRAINT nn_payment_employee_id NOT NULL,
   customer_id VARCHAR2(5) CONSTRAINT nn_bill_customer_id NOT NULL,
   total NUMBER(10) CONSTRAINT nn_bill_total NOT NULL,
   CONSTRAINT fk_bill_customer1
     FOREIGN KEY (customer_id)
-    REFERENCES customer (customer_id))
+    REFERENCES customer (customer_id)),
+  CONSTRAINT fk_bill_employee1
+    FOREIGN KEY (employee_id)
+    REFERENCES employee (employee_id)
+  )
 ;
 
 
@@ -92,9 +97,7 @@ CREATE TABLE employee (
 -- -----------------------------------------------------
 CREATE TABLE payment (
   payment_id VARCHAR2(10) CONSTRAINT pk_payment_id PRIMARY KEY,
-  employee_id VARCHAR2(5) CONSTRAINT nn_payment_employee_id NOT NULL,
   bill_id VARCHAR2(10) CONSTRAINT nn_payment_bill_id NOT NULL,
-  customer_id VARCHAR2(5) CONSTRAINT nn_payment_customer_id NOT NULL,
   payment_date TIMESTAMP CONSTRAINT nn_payment_date NOT NULL,
   payment_method VARCHAR2(100) CONSTRAINT nn_payment_method NOT NULL,
   card_no VARCHAR(16) NULL,
@@ -105,10 +108,6 @@ CREATE TABLE payment (
   CONSTRAINT fk_payment_bill1
     FOREIGN KEY (bill_id)
     REFERENCES bill (bill_id)
-   ,
-  CONSTRAINT fk_payment_employee1
-    FOREIGN KEY (employee_id)
-    REFERENCES employee (employee_id)
    )
 ;
 
