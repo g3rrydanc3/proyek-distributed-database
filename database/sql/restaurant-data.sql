@@ -1,6 +1,6 @@
 connect adminrestaurant/admin@restaurant
 
-create or replace trigger tInsEmployee
+create or replace trigger tInsEmployee_id
 before insert
 on employee
 for each row
@@ -25,12 +25,46 @@ end;
 /
 show err;
 
-insert into employee (first_name, last_name, username, password) VALUES ('Ahmad','Albana', 'Abana', '111111');
-insert into employee (first_name, last_name, username, password) VALUES ('Bayu','Beni', 'Bani', '222222');
-insert into employee (first_name, last_name, username, password) VALUES ('Ciko','Caki', 'Ciki', '333333');
-insert into employee (first_name, last_name, username, password) VALUES ('Doni','Donkin', 'Dodo', '444444');
-insert into employee (first_name, last_name, username, password) VALUES ('Erik','Eka', 'Rika', '555555');
+create or replace trigger tInsUsername_Employee
+before insert
+on employee
+for each row
+declare
+	indeks number(4);
+	temp number(3);
+begin
+	select count(employee_id) into indeks from employee;
+	if indeks is null then
+		new_username := substr(:old.first_name,0,1)||substr(:old.last_name,0,1) || '001';
+	else
+		if to_number(indeks)+1 <9		
+			temp := to_number(indeks)+1;
+			new_username := substr(:old.first_name,0,1)||substr(:old.last_name,0,1) || lpad(temp, 3, '0');
+		else
+			temp := to_number(indeks)+1;
+			new_username := substr(:old.first_name,0,1)||substr(:old.last_name,0,1) || lpad(temp, 2, '0');
+		end if;
+	end if;
+	:new.username := new_username;
+end;
+/
+show err;
 
+create or replace trigger tInsPassword_Employee
+before insert
+on employee
+for each row
+begin
+	:new.password := substr(:old.role,0,2)||:old.employee_id;;
+end;
+/
+show err;
+
+insert into employee (first_name, last_name, role) VALUES ('Restantus','First','ADMIN');
+insert into employee (first_name, last_name, role) VALUES ('Restantus','Second','KASIR');
+insert into employee (first_name, last_name, role) VALUES ('Restantus','Third','ADMIN');
+insert into employee (first_name, last_name, role) VALUES ('Restantus','Fourth','KASIR');
+insert into employee (first_name, last_name, role) VALUES ('Restantus','Fifth','KASIR');
 ------------------------------------------------------------------------------------------
 create or replace trigger tInsMenu
 before insert

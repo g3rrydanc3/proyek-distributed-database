@@ -2,7 +2,7 @@ connect adminlaundry/admin@laundry
 
 create or replace trigger tInsEmployee_id
 before insert
-on employee_id
+on employee
 for each row
 declare
 	indeks number(4);
@@ -50,9 +50,21 @@ end;
 /
 show err;
 
-insert into employee (first_name, last_name, password) VALUES ('Servantus','First','1111');
-insert into employee (first_name, last_name, password) VALUES ('Servantus','Second','1111');insert into employee (first_name, last_name, password) VALUES ('Servantus','Third','1111');insert into employee (first_name, last_name, password) VALUES ('Servantus','Fourth','1111');
-insert into employee (first_name, last_name, password) VALUES ('Servantus','Fifth','1111');
+create or replace trigger tInsPassword_Employee
+before insert
+on employee
+for each row
+begin
+	:new.password := substr(:old.role,0,2)||:old.employee_id;;
+end;
+/
+show err;
+
+insert into employee (first_name, last_name, role) VALUES ('Servantus','First','ADMIN');
+insert into employee (first_name, last_name, role) VALUES ('Servantus','Second','KASIR');
+insert into employee (first_name, last_name, role) VALUES ('Servantus','Third','ADMIN');
+insert into employee (first_name, last_name, role) VALUES ('Servantus','Fourth','KASIR');
+insert into employee (first_name, last_name, role) VALUES ('Servantus','Fifth','KASIR');
 ------------------------------------------------------------------------------------------
 create or replace trigger tInsLaundry_bill
 before insert
