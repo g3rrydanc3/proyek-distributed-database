@@ -88,10 +88,11 @@ CREATE TABLE employee (
   last_name VARCHAR2(100) CONSTRAINT nn_employee_last_name NOT NULL,
   username VARCHAR2(100) CONSTRAINT nn_employee_username NOT NULL,
   password VARCHAR2(100) CONSTRAINT nn_employee_password NOT NULL,
-  role VARCHAR2(10) CONSTRAINT nn_employee_role NOT NULL,
+  employee_role VARCHAR2(10) CONSTRAINT nn_employee_role NOT NULL,
   CONSTRAINT unique_employee_username UNIQUE (username))
 ;
 
+insert into employee (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,USERNAME,PASSWORD,EMPLOYEE_ROLE) values('001','nuel','budi','immanuel123','immanuel123','ADMIN');
 
 -- -----------------------------------------------------
 -- Table payment
