@@ -146,6 +146,36 @@ insert into customer (first_name, last_name, address, phone) values ('Albert', '
 insert into customer (first_name, last_name, address, phone) values ('Ann', 'Baker','4453 Starling Point', '1-(801)235-9148');
 insert into customer (first_name, last_name, address, phone) values ('Annie', 'Banks', '577 Talmadge Junction', '1-(352)347-5840');
 
+---------------------------------------------------------------------------------------------------
+create or replace trigger tInsEmployee
+before insert
+on employee
+for each row
+declare
+	last_id number(5);
+	new_id varchar2(5);
+	new_username varchar2(5);
+begin
+	select max(substr(employee_id,3,3)) into last_id from employee;
+	if last_id is null then
+		new_id := 'EM001';
+		new_username := substr(:new.first_name,0,1)||substr(:new.last_name,0,1) || '001';
+	else
+		new_id := 'EM' || lpad(to_number(last_id) + 1, 3, '0');
+		new_username := substr(:new.first_name,0,1)||substr(:new.last_name,0,1) || lpad(to_number(last_id) + 1, 3, '0');
+	end if;
+	:new.employee_id := new_id;
+	:new.username := new_username;
+end;
+/
+show err;
+
+insert into employee (first_name, last_name, password, role) values ('Andrea', 'Carter', 'PAeJazz', 'ADMIN');
+insert into employee (first_name, last_name, password, role) values ('Alan', 'Castillo', '0Vb4L8a', 'KASIR');
+insert into employee (first_name, last_name, password, role) values ('Ashley', 'Collins', 'BI2PYBV3GVv', 'KASIR');
+insert into employee (first_name, last_name, password, role) values ('Ann', 'Daniels', '5scakY', 'KASIR');
+insert into employee (first_name, last_name, password, role) values ('Aaron', 'Davis', 'IPYdVdmC1G', 'KASIR');
+
 ----------------------------------------------------------------------------------------------------
 --kode : 2digit tanggal, 2digit bulan, 2 digit taun, 4 digit urutan
 create or replace trigger tInsBill
@@ -167,37 +197,11 @@ end;
 /
 show err;
 
-insert into bill (customer_id, total) values ('CU001', 1050000);
-insert into bill (customer_id, total) values ('CU002', 600000);
-insert into bill (customer_id, total) values ('CU003', 800000);
-insert into bill (customer_id, total) values ('CU004', 250000);
-insert into bill (customer_id, total) values ('CU005', 1550000);
-
----------------------------------------------------------------------------------------------------
-create or replace trigger tInsEmployee
-before insert
-on employee
-for each row
-declare
-	last_id number(5);
-	new_id varchar2(5);
-begin
-	select max(substr(employee_id,3,3)) into last_id from employee;
-	if last_id is null then
-		new_id := 'EM001';
-	else
-		new_id := 'EM' || lpad(to_number(last_id) + 1, 3, '0');
-	end if;
-	:new.employee_id := new_id;
-end;
-/
-show err;
-
-insert into employee (first_name, last_name, username, password) values ('Andrea', 'Carter', 'acarter', 'PAeJazz');
-insert into employee (first_name, last_name, username, password) values ('Alan', 'Castillo', 'acastillo', '0Vb4L8a');
-insert into employee (first_name, last_name, username, password) values ('Ashley', 'Collins', 'acollins', 'BI2PYBV3GVv');
-insert into employee (first_name, last_name, username, password) values ('Ann', 'Daniels', 'adaniels', '5scakY');
-insert into employee (first_name, last_name, username, password) values ('Aaron', 'Davis', 'adavis', 'IPYdVdmC1G');
+insert into bill (employee_id, customer_id, total) values ('EM001', 'CU001', 1050000);
+insert into bill (employee_id, customer_id, total) values ('EM002', 'CU002', 600000);
+insert into bill (employee_id, customer_id, total) values ('EM002', 'CU003', 800000);
+insert into bill (employee_id, customer_id, total) values ('EM005', 'CU004', 250000);
+insert into bill (employee_id, customer_id, total) values ('EM003', 'CU005', 1550000);
 
 ----------------------------------------------------------------------------------------------------
 create or replace trigger tInsPayment
@@ -219,16 +223,16 @@ end;
 /
 show err;
 
-insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method) values ('EM001', '1212180001', 'CU001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method) values ('EM001', '1212180001', 'CU001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM001', '1212180002', 'CU002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
-insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM001', '1212180002', 'CU002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
-insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM001', '1212180003', 'CU003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
-insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM001', '1212180003', 'CU003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
-insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method) values ('EM005', '1212180004', 'CU004', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM002', '1212180005', 'CU005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
-insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM002', '1212180005', 'CU005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
-insert into payment (employee_id, bill_id, customer_id, payment_date, payment_method, card_no) values ('EM002', '1212180005', 'CU005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method) values ('1612180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method) values ('1612180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
+insert into payment (bill_id, payment_date, payment_method) values ('1612180004', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
 
 ----------------------------------------------------------------------------------------------------
 create or replace trigger tInsService
@@ -281,15 +285,15 @@ end;
 /
 show err;
 
-insert into bill_detail (payment_id, service_id) values ('P121218001', 'S121218001');
-insert into bill_detail (payment_id, service_id) values ('P121218002', 'S121218002');
-insert into bill_detail (payment_id, service_id) values ('P121218003', 'S121218003');
-insert into bill_detail (payment_id, service_id) values ('P121218004', 'S121218004');
-insert into bill_detail (payment_id, service_id) values ('P121218005', 'S121218005');
-insert into bill_detail (payment_id, service_id) values ('P121218006', 'S121218006');
-insert into bill_detail (payment_id, service_id) values ('P121218007', 'S121218007');
-insert into bill_detail (payment_id, service_id) values ('P121218008', 'S121218008');
-insert into bill_detail (payment_id, service_id) values ('P121218009', 'S121218009');
-insert into bill_detail (payment_id, service_id) values ('P121218010', 'S121218010');
+insert into bill_detail (payment_id, service_id) values ('P161218001', 'S161218001');
+insert into bill_detail (payment_id, service_id) values ('P161218002', 'S161218002');
+insert into bill_detail (payment_id, service_id) values ('P161218003', 'S161218003');
+insert into bill_detail (payment_id, service_id) values ('P161218004', 'S161218004');
+insert into bill_detail (payment_id, service_id) values ('P161218005', 'S161218005');
+insert into bill_detail (payment_id, service_id) values ('P161218006', 'S161218006');
+insert into bill_detail (payment_id, service_id) values ('P161218007', 'S161218007');
+insert into bill_detail (payment_id, service_id) values ('P161218008', 'S161218008');
+insert into bill_detail (payment_id, service_id) values ('P161218009', 'S161218009');
+insert into bill_detail (payment_id, service_id) values ('P161218010', 'S161218010');
 
 commit;
