@@ -52,7 +52,7 @@ CREATE TABLE room (
 -- Table customer
 -- -----------------------------------------------------
 CREATE TABLE customer (
-  customer_id VARCHAR2(16) CONSTRAINT pk_customer_id PRIMARY KEY,
+  customer_id VARCHAR2(5) CONSTRAINT pk_customer_id PRIMARY KEY,
   first_name VARCHAR2(100) CONSTRAINT nn_customer_first_name NOT NULL,
   last_name VARCHAR2(100) CONSTRAINT nn_customer_last_name NOT NULL,
   address VARCHAR2(100) CONSTRAINT nn_customer_address NOT NULL,
