@@ -166,6 +166,12 @@ begin
 	end if;
 	:new.employee_id := new_id;
 	:new.username := new_username;
+	execute immediate 'CREATE USER ' || :new.username || ' IDENTIFIED BY ' || :new.password;
+	if :new.role = 'ADMIN' then
+		execute immediate 'GRANT CONNECT, ADMIN TO' || :new.username;
+	else
+		execute immediate 'GRANT CONNECT, KASIR TO' || :new.username;
+	end if;
 end;
 /
 show err;
