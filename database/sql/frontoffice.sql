@@ -61,23 +61,6 @@ CREATE TABLE customer (
 ;
 
 
--- -----------------------------------------------------
--- Table bill
--- -----------------------------------------------------
-CREATE TABLE bill (
-  bill_id VARCHAR2(10) CONSTRAINT pk_bill_id PRIMARY KEY,
-  employee_id VARCHAR2(5) CONSTRAINT nn_payment_employee_id NOT NULL,
-  customer_id VARCHAR2(5) CONSTRAINT nn_bill_customer_id NOT NULL,
-  total NUMBER(10) CONSTRAINT nn_bill_total NOT NULL,
-  CONSTRAINT fk_bill_customer1
-    FOREIGN KEY (customer_id)
-    REFERENCES customer (customer_id)),
-  CONSTRAINT fk_bill_employee1
-    FOREIGN KEY (employee_id)
-    REFERENCES employee (employee_id)
-  )
-;
-
 
 -- -----------------------------------------------------
 -- Table employee
@@ -88,11 +71,28 @@ CREATE TABLE employee (
   last_name VARCHAR2(100) CONSTRAINT nn_employee_last_name NOT NULL,
   username VARCHAR2(100) CONSTRAINT nn_employee_username NOT NULL,
   password VARCHAR2(100) CONSTRAINT nn_employee_password NOT NULL,
-  employee_role VARCHAR2(10) CONSTRAINT nn_employee_role NOT NULL,
+  role VARCHAR2(10) CONSTRAINT nn_employee_role NOT NULL,
   CONSTRAINT unique_employee_username UNIQUE (username))
 ;
 
-insert into employee (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,USERNAME,PASSWORD,EMPLOYEE_ROLE) values('001','nuel','budi','immanuel123','immanuel123','ADMIN');
+
+
+-- -----------------------------------------------------
+-- Table bill
+-- -----------------------------------------------------
+CREATE TABLE bill (
+  bill_id VARCHAR2(10) CONSTRAINT pk_bill_id PRIMARY KEY,
+  employee_id VARCHAR2(5) CONSTRAINT nn_payment_employee_id NOT NULL,
+  customer_id VARCHAR2(5) CONSTRAINT nn_bill_customer_id NOT NULL,
+  total NUMBER(10) CONSTRAINT nn_bill_total NOT NULL,
+  CONSTRAINT fk_bill_customer1
+    FOREIGN KEY (customer_id)
+    REFERENCES customer (customer_id),
+  CONSTRAINT fk_bill_employee1
+    FOREIGN KEY (employee_id)
+    REFERENCES employee (employee_id)
+  )
+;
 
 -- -----------------------------------------------------
 -- Table payment
@@ -103,10 +103,6 @@ CREATE TABLE payment (
   payment_date TIMESTAMP CONSTRAINT nn_payment_date NOT NULL,
   payment_method VARCHAR2(100) CONSTRAINT nn_payment_method NOT NULL,
   card_no VARCHAR(16) NULL,
-  CONSTRAINT fk_payment_customer1
-    FOREIGN KEY (customer_id)
-    REFERENCES customer (customer_id)
-   ,
   CONSTRAINT fk_payment_bill1
     FOREIGN KEY (bill_id)
     REFERENCES bill (bill_id)
