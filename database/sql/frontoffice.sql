@@ -88,6 +88,7 @@ CREATE TABLE employee (
   last_name VARCHAR2(100) CONSTRAINT nn_employee_last_name NOT NULL,
   username VARCHAR2(100) CONSTRAINT nn_employee_username NOT NULL,
   password VARCHAR2(100) CONSTRAINT nn_employee_password NOT NULL,
+  role VARCHAR2(10) CONSTRAINT nn_employee_role NOT NULL,
   CONSTRAINT unique_employee_username UNIQUE (username))
 ;
 
