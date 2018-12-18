@@ -1,13 +1,9 @@
 connect system/123@travelagent
 
 drop user admintravelagent cascade;
-drop user employeetravelagent cascade;
 
 create user admintravelagent identified by admin;
 grant connect, UNLIMITED TABLESPACE, resource to admintravelagent;
-
-create user employeetravelagent identified by employee;
-grant connect to employeetravelagent;
 
 connect admintravelagent/admin@travelagent
 

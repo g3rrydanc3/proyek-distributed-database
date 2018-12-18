@@ -1,13 +1,9 @@
 connect system/123@restaurant
 
 drop user adminrestaurant cascade;
-drop user employeerestaurant cascade;
 
 create user adminrestaurant identified by admin;
 grant connect, UNLIMITED TABLESPACE, resource to adminrestaurant;
-
-create user employeerestaurant identified by employee;
-grant connect to employeerestaurant;
 
 connect adminrestaurant/admin@restaurant
 

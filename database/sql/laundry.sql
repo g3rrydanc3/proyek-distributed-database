@@ -1,13 +1,9 @@
 connect system/123@laundry
 
 drop user adminlaundry cascade;
-drop user employeelaundry cascade;
 
 create user adminlaundry identified by admin;
 grant connect, UNLIMITED TABLESPACE, resource to adminlaundry;
-
-create user employeelaundry identified by employee;
-grant connect to employeelaundry;
 
 connect adminlaundry/admin@laundry
 
@@ -47,7 +43,6 @@ CREATE TABLE laundry_bill_detail (
   laundry_service_id NUMBER(10) CONSTRAINT PK_LAUNDRY_BILL_DETAIL_3 NOT NULL,
   weight NUMBER(3) CONSTRAINT NN_LAUNDRY_BILL_DETAIL_1 NOT NULL,
   price NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_DETAIL_2 NOT NULL,
-  CONSTRAINT PK_LAUNDRY_BILL_DETAIL_1 PRIMARY KEY (laundry_bill_detail_id),
   CONSTRAINT fk_laundry_bill_detail_1
     FOREIGN KEY (laundry_bill_id)
     REFERENCES laundry_bill (laundry_bill_id)
