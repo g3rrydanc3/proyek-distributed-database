@@ -11,24 +11,9 @@ grant connect to employeelaundry;
 
 connect adminlaundry/admin@laundry
 
---DROP TABLE employee CASCADE CONSTRAINT PURGE;
 --DROP TABLE laundry_bill CASCADE CONSTRAINT PURGE;
 --DROP TABLE laundry_service CASCADE CONSTRAINT PURGE;
 --DROP TABLE laundry_bill_detail CASCADE CONSTRAINT PURGE;
-
--- -----------------------------------------------------
--- Table employee
--- -----------------------------------------------------
-CREATE TABLE employee (
-  employee_id VARCHAR2(5) CONSTRAINT PK_EMPLOYEE_1 PRIMARY KEY (employee_id),
-  first_name VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_1 NOT NULL,
-  last_name VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_2 NOT NULL,
-  username VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_3 NOT NULL,
-  password VARCHAR2(100) CONSTRAINT NN_EMPLOYEE_4 NOT NULL,
-  role VARCHAR2(10) CONSTRAINT nn_employee_role NOT NULL,
-  CONSTRAINT username_UNIQUE UNIQUE  (username))
-;
-
 
 -- -----------------------------------------------------
 -- Table laundry_bill
@@ -38,11 +23,7 @@ CREATE TABLE laundry_bill (
   room_no NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_1 NOT NULL,
   employee_id NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_2 NOT NULL,
   total NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_3 NOT NULL,
-  bill_date TIMESTAMP CONSTRAINT NN_LAUNDRY_BILL_4 NOT NULL,
-  CONSTRAINT fk_laundry_1
-    FOREIGN KEY (employee_id)
-    REFERENCES employee (employee_id)
-   )
+  bill_date TIMESTAMP CONSTRAINT NN_LAUNDRY_BILL_4 NOT NULL
 ;
 
 
