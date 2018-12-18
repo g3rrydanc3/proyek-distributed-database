@@ -3,10 +3,30 @@ connect system/123@frontoffice
 drop user adminfrontoffice cascade;
 
 create user adminfrontoffice identified by admin;
-grant connect, UNLIMITED TABLESPACE, resource to adminfrontoffice;
+grant connect, UNLIMITED TABLESPACE, resource, create user to adminfrontoffice WITH ADMIN OPTION;
+grant dba to adminfrontoffice;
+grant create public database link to adminfrontoffice;
 grant create role to adminfrontoffice;
 
 connect adminfrontoffice/admin@frontoffice
+
+create public database link keLaundry
+connect to adminlaundry identified by admin
+using 'Laundry';
+
+create public database link keRestaurant
+connect to adminrestaurant identified by admin
+using 'Restaurant';
+
+create public database link keTravelAgent
+connect to admintravelagent identified by admin
+using 'TravelAgent';
+
+drop role ADMIN;
+drop role KASIR;
+
+create role ADMIN;
+create role KASIR;
 
 --DROP TABLE bill_detail CASCADE CONSTRAINT PURGE;
 --DROP TABLE service CASCADE CONSTRAINT PURGE;
@@ -67,7 +87,7 @@ CREATE TABLE employee (
   username VARCHAR2(100) CONSTRAINT nn_employee_username NOT NULL,
   password VARCHAR2(100) CONSTRAINT nn_employee_password NOT NULL,
   role VARCHAR2(10) CONSTRAINT nn_employee_role NOT NULL,
-  database VARCHAR2(10) CONSTRAINT nn_employee_database NOT NULL,
+  database VARCHAR2(15) CONSTRAINT nn_employee_database NOT NULL,
   status number(1) CONSTRAINT nn_employee_status NOT NULL,
   CONSTRAINT unique_employee_username UNIQUE (username))
 ;
@@ -139,10 +159,7 @@ CREATE TABLE bill_detail (
    )
 ;
 
-drop role ADMIN;
-drop role KASIR;
 
-create role ADMIN;
 grant select,update,delete on room_type to ADMIN;
 grant select,update,delete on room to ADMIN;
 grant select,update,delete on customer to ADMIN;
@@ -152,7 +169,6 @@ grant select,update,delete on bill to ADMIN;
 grant select,update,delete on bill_detail to ADMIN;
 grant select,update,delete on service to ADMIN;
 
-create role KASIR;
 grant select,update,delete on room to KASIR;
 grant select,update,delete on room_type to KASIR;
 grant select,update,delete on customer to KASIR;

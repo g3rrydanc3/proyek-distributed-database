@@ -147,6 +147,14 @@ insert into customer (first_name, last_name, address, phone) values ('Ann', 'Bak
 insert into customer (first_name, last_name, address, phone) values ('Annie', 'Banks', '577 Talmadge Junction', '1-(352)347-5840');
 
 ---------------------------------------------------------------------------------------------------
+create sequence sqLogEmployee minvalue 1 start with 1 increment by 1;
+
+create table logEmployee(
+	logNo number constraint pk_logEmployee primary key,
+	employee_id varchar2(5),
+	status varchar2(1)
+);
+
 create or replace trigger tInsEmployee
 before insert
 on employee
@@ -159,28 +167,54 @@ begin
 	select max(substr(employee_id,3,3)) into last_id from employee;
 	if last_id is null then
 		new_id := 'EM001';
-		new_username := substr(:new.first_name,0,1)||substr(:new.last_name,0,1) || '001';
+		new_username := substr(:new.first_name,1,1)||substr(:new.last_name,1,1) || '001';
+		:new.password := substr(:new.role,1,2) || new_id;
 	else
 		new_id := 'EM' || lpad(to_number(last_id) + 1, 3, '0');
-		new_username := substr(:new.first_name,0,1)||substr(:new.last_name,0,1) || lpad(to_number(last_id) + 1, 3, '0');
+		new_username := substr(:new.first_name,1,1)||substr(:new.last_name,1,1) || lpad(to_number(last_id) + 1, 3, '0');
+		:new.password := substr(:new.role,1,2) || new_id;
 	end if;
 	:new.employee_id := new_id;
 	:new.username := new_username;
-	execute immediate 'CREATE USER ' || :new.username || ' IDENTIFIED BY ' || :new.password;
-	if :new.role = 'ADMIN' then
-		execute immediate 'GRANT CONNECT, ADMIN TO' || :new.username;
-	else
-		execute immediate 'GRANT CONNECT, KASIR TO' || :new.username;
-	end if;
+	insert into logEmployee values (sqLogEmployee.nextval, :new.employee_id, 'F');
 end;
 /
 show err;
 
-insert into employee (first_name, last_name, password, role) values ('Andrea', 'Carter', 'PAeJazz', 'ADMIN');
-insert into employee (first_name, last_name, password, role) values ('Alan', 'Castillo', '0Vb4L8a', 'KASIR');
-insert into employee (first_name, last_name, password, role) values ('Ashley', 'Collins', 'BI2PYBV3GVv', 'KASIR');
-insert into employee (first_name, last_name, password, role) values ('Ann', 'Daniels', '5scakY', 'KASIR');
-insert into employee (first_name, last_name, password, role) values ('Aaron', 'Davis', 'IPYdVdmC1G', 'KASIR');
+create or replace procedure createUser
+is
+	username varchar2(20);
+	password varchar2(20);
+	role varchar2(20);
+begin
+	for i in (select * from logEmployee where status = 'F')
+	loop
+		select username into username from employee where employee_id = i.employee_id;
+		select password into password from employee where employee_id = i.employee_id;
+		select role into role from employee where employee_id = i.employee_id;
+		EXECUTE IMMEDIATE 'CREATE USER ' || username || ' IDENTIFIED BY ' || password;
+		if role = 'ADMIN' then
+			EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || username;
+		else
+			EXECUTE IMMEDIATE 'GRANT CONNECT TO ' || username;
+		end if;
+		update logEmployee set status = 'T' where logNo = i.logNo;
+		COMMIT;
+	end loop;
+end;
+/
+show err;
+
+insert into employee (first_name, last_name, role, database, status) values ('Andrea', 'Carter',  'ADMIN', 'FRONTOFFICE', 1);
+insert into employee (first_name, last_name, role, database, status) values ('Alan', 'Castillo', 'KASIR', 'FRONTOFFICE', 1);
+insert into employee (first_name, last_name, role, database, status) values ('Ashley', 'Collins', 'ADMIN', 'RESTAURANT', 1);
+insert into employee (first_name, last_name, role, database, status) values ('Ann', 'Daniels', 'KASIR', 'RESTAURANT', 1);
+insert into employee (first_name, last_name, role, database, status) values ('Aaron', 'Davis', 'ADMIN', 'TRAVELAGENT', 1);
+insert into employee (first_name, last_name, role, database, status) values ('Amy', 'Danny', 'KASIR', 'TRAVELAGENT', 1);
+insert into employee (first_name, last_name, role, database, status) values ('Ruby', 'Martin', 'ADMIN', 'LAUNDRY', 1);
+insert into employee (first_name, last_name, role, database, status) values ('Kathleen', 'Watson', 'KASIR', 'LAUNDRY', 1);
+
+execute createUser;
 
 ----------------------------------------------------------------------------------------------------
 --kode : 2digit tanggal, 2digit bulan, 2 digit taun, 4 digit urutan
@@ -229,16 +263,16 @@ end;
 /
 show err;
 
-insert into payment (bill_id, payment_date, payment_method) values ('1612180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (bill_id, payment_date, payment_method) values ('1612180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
-insert into payment (bill_id, payment_date, payment_method) values ('1612180004', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1612180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method) values ('1812180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method) values ('1812180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
+insert into payment (bill_id, payment_date, payment_method) values ('1812180004', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
 
 ----------------------------------------------------------------------------------------------------
 create or replace trigger tInsService

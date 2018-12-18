@@ -3,7 +3,8 @@ connect system/123@laundry
 drop user adminlaundry cascade;
 
 create user adminlaundry identified by admin;
-grant connect, UNLIMITED TABLESPACE, resource to adminlaundry;
+grant connect, UNLIMITED TABLESPACE, resource, create user to adminlaundry WITH ADMIN OPTION;
+grant dba to adminlaundry;
 grant create public database link to adminlaundry;
 connect adminlaundry/admin@laundry
 
@@ -21,7 +22,7 @@ using 'FrontOffice';
 CREATE TABLE laundry_bill (
   laundry_bill_id VARCHAR2(10) CONSTRAINT PK_LAUNDRY_BILL_1 PRIMARY KEY,
   room_no NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_1 NOT NULL,
-  employee_id NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_2 NOT NULL,
+  employee_id VARCHAR2(5) CONSTRAINT NN_LAUNDRY_BILL_2 NOT NULL,
   total NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_3 NOT NULL,
   bill_date TIMESTAMP CONSTRAINT NN_LAUNDRY_BILL_4 NOT NULL
 );
@@ -42,7 +43,7 @@ CREATE TABLE laundry_service (
 -- Table laundry_bill_detail
 -- -----------------------------------------------------
 CREATE TABLE laundry_bill_detail (
-  laundry_bill_detail_id NUMBER(10) PRIMARY KEY,
+  laundry_bill_detail_id VARCHAR2(14) PRIMARY KEY,
   laundry_bill_id VARCHAR2(10) CONSTRAINT PK_LAUNDRY_BILL_DETAIL_2 NOT NULL,
   laundry_service_id NUMBER(10) CONSTRAINT PK_LAUNDRY_BILL_DETAIL_3 NOT NULL,
   weight NUMBER(3) CONSTRAINT NN_LAUNDRY_BILL_DETAIL_1 NOT NULL,

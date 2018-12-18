@@ -1,71 +1,5 @@
 connect adminrestaurant/admin@restaurant
 
-create or replace trigger tInsEmployee_id
-before insert
-on employee
-for each row
-declare
-	indeks number(4);
-	temp number(3);
-begin
-	select count(employee_id) into indeks from employee;
-	if indeks is null then
-		new_employee_id := '0001';
-	else
-		if to_number(indeks)+1 <9		
-			temp := to_number(indeks)+1;
-			new_employee_id := lpad(temp, 4, '0');
-		else
-			temp := to_number(indeks)+1;
-			new_employee_id := lpad(temp, 3, '0');
-		end if;
-	end if;
-	:new.employee_id := new_employee_id;
-end;
-/
-show err;
-
-create or replace trigger tInsUsername_Employee
-before insert
-on employee
-for each row
-declare
-	indeks number(4);
-	temp number(3);
-begin
-	select count(employee_id) into indeks from employee;
-	if indeks is null then
-		new_username := substr(:old.first_name,0,1)||substr(:old.last_name,0,1) || '001';
-	else
-		if to_number(indeks)+1 <9		
-			temp := to_number(indeks)+1;
-			new_username := substr(:old.first_name,0,1)||substr(:old.last_name,0,1) || lpad(temp, 3, '0');
-		else
-			temp := to_number(indeks)+1;
-			new_username := substr(:old.first_name,0,1)||substr(:old.last_name,0,1) || lpad(temp, 2, '0');
-		end if;
-	end if;
-	:new.username := new_username;
-end;
-/
-show err;
-
-create or replace trigger tInsPassword_Employee
-before insert
-on employee
-for each row
-begin
-	:new.password := substr(:old.role,0,2)||:old.employee_id;;
-end;
-/
-show err;
-
-insert into employee (first_name, last_name, role) VALUES ('Restantus','First','ADMIN');
-insert into employee (first_name, last_name, role) VALUES ('Restantus','Second','KASIR');
-insert into employee (first_name, last_name, role) VALUES ('Restantus','Third','ADMIN');
-insert into employee (first_name, last_name, role) VALUES ('Restantus','Fourth','KASIR');
-insert into employee (first_name, last_name, role) VALUES ('Restantus','Fifth','KASIR');
-------------------------------------------------------------------------------------------
 create or replace trigger tInsMenu
 before insert
 on menu
@@ -73,12 +7,13 @@ for each row
 declare
 	indeks number(4);
 	temp number(3);
+	new_id varchar2(4);
 begin
-	select count(id ) into indeks from menu;
+	select count(menu_id) into indeks from menu;
 	if indeks is null then
 		new_id := '0001';
 	else
-		if to_number(indeks)+1 <9		
+		if to_number(indeks)+1 <9 then
 			temp := to_number(indeks)+1;
 			new_id := lpad(temp, 4, '0');
 		else
@@ -86,21 +21,21 @@ begin
 			new_id := lpad(temp, 3, '0');
 		end if;
 	end if;
-	:new.id := new_id;
+	:new.menu_id := new_id;
 end;
 /
 show err;
 
-insert into menu (name,menu_type,price) VALUES ('Aglio Olio','Food',100000);
-insert into menu (name,menu_type,price) VALUES ('Burger Krezz','Food',200000);
-insert into menu (name,menu_type,price) VALUES ('Chicken Katsudon','Food',300000);
-insert into menu (name,menu_type,price) VALUES ('Donburi Mayo','Food',400000);
-insert into menu (name,menu_type,price) VALUES ('Egg Benedict','Food',500000);
-insert into menu (name,menu_type,price) VALUES ('Aquase','Beverages',150000);
-insert into menu (name,menu_type,price) VALUES ('Beer Splash','Beverages',250000);
-insert into menu (name,menu_type,price) VALUES ('Cocktail Soda','Beverages',350000);
-insert into menu (name,menu_type,price) VALUES ('Dragon Lemonade','Beverages',450000);
-insert into menu (name,menu_type,price) VALUES ('Espresso Torabika','Beverages',550000);
+insert into menu (menu_name,menu_type,price) VALUES ('Aglio Olio','Food',100000);
+insert into menu (menu_name,menu_type,price) VALUES ('Burger Krezz','Food',200000);
+insert into menu (menu_name,menu_type,price) VALUES ('Chicken Katsudon','Food',300000);
+insert into menu (menu_name,menu_type,price) VALUES ('Donburi Mayo','Food',400000);
+insert into menu (menu_name,menu_type,price) VALUES ('Egg Benedict','Food',500000);
+insert into menu (menu_name,menu_type,price) VALUES ('Aquase','Beverages',150000);
+insert into menu (menu_name,menu_type,price) VALUES ('Beer Splash','Beverages',250000);
+insert into menu (menu_name,menu_type,price) VALUES ('Cocktail Soda','Beverages',350000);
+insert into menu (menu_name,menu_type,price) VALUES ('Dragon Lemonade','Beverages',450000);
+insert into menu (menu_name,menu_type,price) VALUES ('Espresso Torabika','Beverages',550000);
 
 ------------------------------------------------------------------------------------------------
 create or replace trigger tInsMenu_bill
@@ -110,12 +45,13 @@ for each row
 declare
 	indeks number(4);
 	temp number(3);
+	new_id varchar2(12);
 begin
-	select count(id) into indeks from menu_bill;
+	select count(menu_bill_id) into indeks from menu_bill;
 	if indeks is null then
 		new_id := to_char(sysdate, 'ddmmyy')||'0001';
 	else
-		if to_number(indeks)+1 <9		
+		if to_number(indeks)+1 <9 then
 			temp := to_number(indeks)+1;
 			new_id := to_char(sysdate, 'ddmmyy')||lpad(temp, 4, '0');
 		else
@@ -123,18 +59,17 @@ begin
 			new_id := to_char(sysdate, 'ddmmyy')||lpad(temp, 3, '0');
 		end if;
 	end if;
-	:new.id := new_id;
-	:new.bill_date := to_char(sysdate, 'ddmmyy');
+	:new.menu_bill_id := new_id;
 end;
 /
 show err;
 
 
-insert into menu_bill (room_no, table_no, capacity, total, employee_id) VALUES (01,1,2,200000,0001);
-insert into menu_bill (room_no, table_no, capacity, total, employee_id) VALUES (02,2,1,450000,0001);
-insert into menu_bill (room_no, table_no, capacity, total, employee_id) VALUES (03,3,1,100000,0001);
-insert into menu_bill (room_no, table_no, capacity, total, employee_id) VALUES (04,5,2,750000,0002);
-insert into menu_bill (room_no, table_no, capacity, total, employee_id) VALUES (05,4,2,200000,0001);
+insert into menu_bill (employee_id, room_no, table_no, total, bill_date) VALUES ('EM001',0,2,200000,to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'));
+insert into menu_bill (employee_id, room_no, table_no, total, bill_date) VALUES ('EM002',0,1,450000,to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'));
+insert into menu_bill (employee_id, room_no, table_no, total, bill_date) VALUES ('EM005',0,1,100000,to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'));
+insert into menu_bill (employee_id, room_no, table_no, total, bill_date) VALUES ('EM004',0,2,750000,to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'));
+insert into menu_bill (employee_id, room_no, table_no, total, bill_date) VALUES ('EM004',0,2,200000,to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'));
 
 ----------------------------------------------------------------------------------------------------
 --
@@ -145,12 +80,13 @@ for each row
 declare
 	indeks number(4);
 	temp number(3);
+	new_id varchar2(10);
 begin
-	select count(id) into indeks from menu_bill_detail;
+	select count(menu_bill_detail_id) into indeks from menu_bill_detail;
 	if indeks is null then
 		new_id := to_char(sysdate, 'ddmmyy')||'0001';
 	else
-		if to_number(indeks)+1 <9		
+		if to_number(indeks)+1 <9 then
 			temp := to_number(indeks)+1;
 			new_id := to_char(sysdate, 'ddmmyy')||lpad(temp, 4, '0');
 		else
@@ -158,13 +94,13 @@ begin
 			new_id := to_char(sysdate, 'ddmmyy')||lpad(temp, 3, '0');
 		end if;
 	end if;
-	:new.id := new_id;
+	:new.menu_bill_detail_id := new_id;
 end;
 /
 show err;
 
-insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (0112180001,0001);
-insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (0212180001,0003);
-insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (0212180001,0002);
-insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (0312180001,0007);
-insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (0312180001,0002);
+insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0001);
+insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0003);
+insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0002);
+insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0007);
+insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0002);

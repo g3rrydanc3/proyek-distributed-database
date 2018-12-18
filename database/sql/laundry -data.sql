@@ -1,71 +1,5 @@
 connect adminlaundry/admin@laundry
 
-create or replace trigger tInsEmployee_id
-before insert
-on employee
-for each row
-declare
-	indeks number(4);
-	temp number(3);
-begin
-	select count(employee_id) into indeks from employee;
-	if indeks is null then
-		new_employee_id := '0001';
-	else
-		if to_number(indeks)+1 <9		
-			temp := to_number(indeks)+1;
-			new_employee_id := lpad(temp, 4, '0');
-		else
-			temp := to_number(indeks)+1;
-			new_employee_id := lpad(temp, 3, '0');
-		end if;
-	end if;
-	:new.employee_id := new_employee_id;
-end;
-/
-show err;
-
-create or replace trigger tInsUsername_Employee
-before insert
-on employee
-for each row
-declare
-	indeks number(4);
-	temp number(3);
-begin
-	select count(employee_id) into indeks from employee;
-	if indeks is null then
-		new_username := substr(:old.first_name,0,1)||substr(:old.last_name,0,1) || '001';
-	else
-		if to_number(indeks)+1 <9		
-			temp := to_number(indeks)+1;
-			new_username := substr(:old.first_name,0,1)||substr(:old.last_name,0,1) || lpad(temp, 3, '0');
-		else
-			temp := to_number(indeks)+1;
-			new_username := substr(:old.first_name,0,1)||substr(:old.last_name,0,1) || lpad(temp, 2, '0');
-		end if;
-	end if;
-	:new.username := new_username;
-end;
-/
-show err;
-
-create or replace trigger tInsPassword_Employee
-before insert
-on employee
-for each row
-begin
-	:new.password := substr(:old.role,0,2)||:old.employee_id;;
-end;
-/
-show err;
-
-insert into employee (first_name, last_name, role) VALUES ('Servantus','First','ADMIN');
-insert into employee (first_name, last_name, role) VALUES ('Servantus','Second','KASIR');
-insert into employee (first_name, last_name, role) VALUES ('Servantus','Third','ADMIN');
-insert into employee (first_name, last_name, role) VALUES ('Servantus','Fourth','KASIR');
-insert into employee (first_name, last_name, role) VALUES ('Servantus','Fifth','KASIR');
-------------------------------------------------------------------------------------------
 create or replace trigger tInsLaundry_bill
 before insert
 on laundry_bill
@@ -73,12 +7,13 @@ for each row
 declare
 	indeks number(4);
 	temp number(3);
+	new_laundry_bill_id varchar2(10);
 begin
 	select count(laundry_bill_id) into indeks from laundry_bill;
 	if indeks is null then
 		new_laundry_bill_id := to_char(sysdate, 'ddmmyy')||'0001';
 	else
-		if to_number(indeks)+1 <9		
+		if to_number(indeks)+1 <9 then
 			temp := to_number(indeks)+1;
 			new_laundry_bill_id := to_char(sysdate, 'ddmmyy')||lpad(temp, 4, '0');
 		else
@@ -92,11 +27,11 @@ end;
 /
 show err;
 
-insert into laundry_bill (room_no,employee_id,total,status) VALUES (101,'SF001',2000000,1);
-insert into laundry_bill (room_no,employee_id,total,status) VALUES (102,'SF001',2500000,2);
-insert into laundry_bill (room_no,employee_id,total,status) VALUES (202,'SF003',2500000,1);
-insert into laundry_bill (room_no,employee_id,total,status) VALUES (105,'SF001',1500000,1);
-insert into laundry_bill (room_no,employee_id,total,status) VALUES (104,'SF003',3500000,2);
+insert into laundry_bill (room_no,employee_id,total,bill_date) VALUES (101,'EM001',2000000,to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'));
+insert into laundry_bill (room_no,employee_id,total,bill_date) VALUES (102,'EM001',2500000,to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'));
+insert into laundry_bill (room_no,employee_id,total,bill_date) VALUES (202,'EM003',2500000,to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'));
+insert into laundry_bill (room_no,employee_id,total,bill_date) VALUES (105,'EM001',1500000,to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'));
+insert into laundry_bill (room_no,employee_id,total,bill_date) VALUES (104,'EM003',3500000,to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'));
 ------------------------------------------------------------------------------------------
 create or replace trigger tInsLaundry_Service
 before insert
@@ -105,12 +40,13 @@ for each row
 declare
 	indeks number(4);
 	temp number(3);
+	new_laundry_service_id varchar2(4);
 begin
 	select count(laundry_service_id) into indeks from laundry_service;
 	if indeks is null then
 		new_laundry_service_id := '0001';
 	else
-		if to_number(indeks)+1 <9		
+		if to_number(indeks)+1 <9 then
 			temp := to_number(indeks)+1;
 			new_laundry_service_id := lpad(temp, 4, '0');
 		else
@@ -136,20 +72,23 @@ for each row
 declare
 	indeks number(4);
 	temp number(3);
+	new_laundry_bill_detail_id varchar2(14);
 begin
-	select count(id) into indeks from laundry_bill_detail;
+	select count(laundry_bill_detail_id) into indeks from laundry_bill_detail;
 	if indeks is null then
-		new_laundry_bill_detail_id := :old.laundry_bill_id||'0001';
+		new_laundry_bill_detail_id := :new.laundry_bill_id||'0001';
 	else
-		if to_number(indeks)+1 <9		
+		if to_number(indeks)+1 <9 then
 			temp := to_number(indeks)+1;
-			new_laundry_bill_detail_id := :old.laundry_bill_id||lpad(temp, 4, '0');
+			new_laundry_bill_detail_id := :new.laundry_bill_id||lpad(temp, 4, '0');
 		else
 			temp := to_number(indeks)+1;
-			new_laundry_bill_detail_id := :old.laundry_bill_id||lpad(temp, 3, '0');
+			new_laundry_bill_detail_id := :new.laundry_bill_id||lpad(temp, 3, '0');
 		end if;
 	end if;
 	:new.laundry_bill_detail_id := new_laundry_bill_detail_id;
 end;
 /
 show err;
+
+insert into laundry_bill_detail (laundry_bill_id, laundry_service_id, weight, price) values ('1812180004', 1, 10, 500000);

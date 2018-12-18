@@ -3,13 +3,18 @@ connect system/123@restaurant
 drop user adminrestaurant cascade;
 
 create user adminrestaurant identified by admin;
-grant connect, UNLIMITED TABLESPACE, resource to adminrestaurant;
+grant connect, UNLIMITED TABLESPACE, resource, create user to adminrestaurant WITH ADMIN OPTION;
+grant dba to adminrestaurant;
 grant create public database link to adminrestaurant;
 connect adminrestaurant/admin@restaurant
 
 create public database link keFrontOffice
 connect to adminfrontoffice identified by admin
 using 'FrontOffice';
+
+--DROP TABLE menu CASCADE CONSTRAINT PURGE;
+--DROP TABLE menu_bill CASCADE CONSTRAINT PURGE;
+--DROP TABLE menu_bill_detail CASCADE CONSTRAINT PURGE;
 
 -- -----------------------------------------------------
 -- Table menu
@@ -27,8 +32,8 @@ CREATE TABLE menu (
 -- Table menu_bill
 -- -----------------------------------------------------
 CREATE TABLE menu_bill (
-  menu_bill_id VARCHAR2(5) CONSTRAINT PK_MENU_BILL_ID PRIMARY KEY,
-  employee_id NUMBER(10) CONSTRAINT NN_MENU_BILL_EMPLOYEE_ID NOT NULL,
+  menu_bill_id VARCHAR2(10) CONSTRAINT PK_MENU_BILL_ID PRIMARY KEY,
+  employee_id VARCHAR2(5) CONSTRAINT NN_MENU_BILL_EMPLOYEE_ID NOT NULL,
   room_no NUMBER(10) CONSTRAINT NN_MENU_BILL_ROOM_NO NOT NULL,
   table_no NUMBER(10) CONSTRAINT NN_MENU_BILL_TABLE_NO NOT NULL,
   total NUMBER(10) CONSTRAINT NN_MENU_BILL_TOTAL NOT NULL,
@@ -41,7 +46,7 @@ CREATE TABLE menu_bill (
 -- Table menu_bill_detail
 -- -----------------------------------------------------
 CREATE TABLE menu_bill_detail (
-  menu_bill_detail_id VARCHAR2(5) CONSTRAINT PK_MENU_BILL_DETAIL_ID PRIMARY KEY,
+  menu_bill_detail_id VARCHAR2(12) CONSTRAINT PK_MENU_BILL_DETAIL_ID PRIMARY KEY,
   menu_bill_id VARCHAR2(10) CONSTRAINT NN_MENU_BILL_DETAIL_1 NOT NULL,
   menu_id NUMBER(10) CONSTRAINT NN_MENU_BILL_DETAIL_2 NOT NULL,
   CONSTRAINT fk_menu_bill_detail_menu_bill1

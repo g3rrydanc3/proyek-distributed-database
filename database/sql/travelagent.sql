@@ -3,7 +3,8 @@ connect system/123@travelagent
 drop user admintravelagent cascade;
 
 create user admintravelagent identified by admin;
-grant connect, UNLIMITED TABLESPACE, resource to admintravelagent;
+grant connect, UNLIMITED TABLESPACE, resource, create user to admintravelagent WITH ADMIN OPTION;
+grant dba to admintravelagent;
 grant create public database link to admintravelagent;
 connect admintravelagent/admin@travelagent
 
