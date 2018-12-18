@@ -325,15 +325,15 @@ end;
 /
 show err;
 
-insert into bill_detail (payment_id, service_id) values ('P161218001', 'S161218001');
-insert into bill_detail (payment_id, service_id) values ('P161218002', 'S161218002');
-insert into bill_detail (payment_id, service_id) values ('P161218003', 'S161218003');
-insert into bill_detail (payment_id, service_id) values ('P161218004', 'S161218004');
-insert into bill_detail (payment_id, service_id) values ('P161218005', 'S161218005');
-insert into bill_detail (payment_id, service_id) values ('P161218006', 'S161218006');
-insert into bill_detail (payment_id, service_id) values ('P161218007', 'S161218007');
-insert into bill_detail (payment_id, service_id) values ('P161218008', 'S161218008');
-insert into bill_detail (payment_id, service_id) values ('P161218009', 'S161218009');
-insert into bill_detail (payment_id, service_id) values ('P161218010', 'S161218010');
+insert into bill_detail (payment_id, service_id) values ('P181218001', 'S181218001');
+insert into bill_detail (payment_id, service_id) values ('P181218002', 'S181218002');
+insert into bill_detail (payment_id, service_id) values ('P181218003', 'S181218003');
+insert into bill_detail (payment_id, service_id) values ('P181218004', 'S181218004');
+insert into bill_detail (payment_id, service_id) values ('P181218005', 'S181218005');
+insert into bill_detail (payment_id, service_id) values ('P181218006', 'S181218006');
+insert into bill_detail (payment_id, service_id) values ('P181218007', 'S181218007');
+insert into bill_detail (payment_id, service_id) values ('P181218008', 'S181218008');
+insert into bill_detail (payment_id, service_id) values ('P181218009', 'S181218009');
+insert into bill_detail (payment_id, service_id) values ('P181218010', 'S181218010');
 
 commit;
