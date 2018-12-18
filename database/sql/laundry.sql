@@ -19,7 +19,7 @@ connect adminlaundry/admin@laundry
 -- Table laundry_bill
 -- -----------------------------------------------------
 CREATE TABLE laundry_bill (
-  laundry_bill_id VARCHAR2(10) CONSTRAINT PK_LAUNDRY_BILL_1 PRIMARY KEY (laundry_bill_id),
+  laundry_bill_id VARCHAR2(10) CONSTRAINT PK_LAUNDRY_BILL_1 PRIMARY KEY,
   room_no NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_1 NOT NULL,
   employee_id NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_2 NOT NULL,
   total NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_3 NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE laundry_service (
 -- -----------------------------------------------------
 CREATE TABLE laundry_bill_detail (
   laundry_bill_detail_id NUMBER(10),
-  laundry_bill_id NUMBER(10) CONSTRAINT PK_LAUNDRY_BILL_DETAIL_2 NOT NULL,
+  laundry_bill_id VARCHAR2(10) CONSTRAINT PK_LAUNDRY_BILL_DETAIL_2 NOT NULL,
   laundry_service_id NUMBER(10) CONSTRAINT PK_LAUNDRY_BILL_DETAIL_3 NOT NULL,
   weight NUMBER(3) CONSTRAINT NN_LAUNDRY_BILL_DETAIL_1 NOT NULL,
   price NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_DETAIL_2 NOT NULL,
