@@ -22,7 +22,6 @@ begin
 		end if;
 	end if;
 	:new.laundry_bill_id := new_laundry_bill_id;
-	:new.bill_date := to_char(sysdate, 'ddmmyy');
 end;
 /
 show err;
