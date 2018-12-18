@@ -1,34 +1,10 @@
 connect system/123@frontoffice
 
 drop user adminfrontoffice cascade;
-drop user employeefrontoffice cascade;
 
 create user adminfrontoffice identified by admin;
 grant connect, UNLIMITED TABLESPACE, resource to adminfrontoffice;
 grant create role to adminfrontoffice;
-
-create user employeefrontoffice identified by employee;
-grant connect to employeefrontoffice;
-
-create role ADMIN;
-grant select,update,delete on room_type to ADMIN;
-grant select,update,delete on room to ADMIN;
-grant select,update,delete on customer to ADMIN;
-grant select,update,delete on employee to ADMIN;
-grant select,update,delete on payment to ADMIN;
-grant select,update,delete on bill to ADMIN;
-grant select,update,delete on bill_detail to ADMIN;
-grant select,update,delete on service to ADMIN;
-
-create role KASIR;
-grant select,update,delete on room to KASIR;
-grant select,update,delete on room_type to KASIR;
-grant select,update,delete on customer to KASIR;
-grant select,update,delete on employee to KASIR;
-grant select,update,delete on payment to KASIR;
-grant select,update,delete on bill to KASIR;
-grant select,update,delete on bill_detail to KASIR;
-grant select,update,delete on service to KASIR;
 
 connect adminfrontoffice/admin@frontoffice
 
@@ -163,17 +139,25 @@ CREATE TABLE bill_detail (
    )
 ;
 
-set serveroutput on
-BEGIN 
-	FOR x IN (SELECT * FROM tab)
-	LOOP
-		if lower(x.tname) != 'employee' then
-			dbms_output.put_line('SELECT, INSERT, UPDATE ' || x.tname);
-			EXECUTE IMMEDIATE 'GRANT SELECT, INSERT, UPDATE ON ' || x.tname || ' TO employeefrontoffice';
-		else
-			dbms_output.put_line('SELECT ' || x.tname);
-			EXECUTE IMMEDIATE 'GRANT SELECT ON ' || x.tname || ' TO employeefrontoffice';
-		end if;
-	END LOOP;
-END; 
-/
+drop role ADMIN;
+drop role KASIR;
+
+create role ADMIN;
+grant select,update,delete on room_type to ADMIN;
+grant select,update,delete on room to ADMIN;
+grant select,update,delete on customer to ADMIN;
+grant select,update,delete on employee to ADMIN;
+grant select,update,delete on payment to ADMIN;
+grant select,update,delete on bill to ADMIN;
+grant select,update,delete on bill_detail to ADMIN;
+grant select,update,delete on service to ADMIN;
+
+create role KASIR;
+grant select,update,delete on room to KASIR;
+grant select,update,delete on room_type to KASIR;
+grant select,update,delete on customer to KASIR;
+grant select,update,delete on employee to KASIR;
+grant select,update,delete on payment to KASIR;
+grant select,update,delete on bill to KASIR;
+grant select,update,delete on bill_detail to KASIR;
+grant select,update,delete on service to KASIR;
