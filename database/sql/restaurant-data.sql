@@ -104,3 +104,5 @@ insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0003);
 insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0002);
 insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0007);
 insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0002);
+
+commit;

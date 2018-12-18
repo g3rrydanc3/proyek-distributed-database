@@ -92,3 +92,5 @@ end;
 show err;
 
 insert into laundry_bill_detail (laundry_bill_id, laundry_service_id, weight, price) values ('1812180004', 1, 10, 500000);
+
+commit;
