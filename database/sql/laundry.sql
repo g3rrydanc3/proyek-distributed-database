@@ -4,8 +4,12 @@ drop user adminlaundry cascade;
 
 create user adminlaundry identified by admin;
 grant connect, UNLIMITED TABLESPACE, resource to adminlaundry;
-
+grant create public database link to adminlaundry;
 connect adminlaundry/admin@laundry
+
+create public database link keFrontOffice
+connect to adminfrontoffice identified by admin
+using 'FrontOffice';
 
 --DROP TABLE laundry_bill CASCADE CONSTRAINT PURGE;
 --DROP TABLE laundry_service CASCADE CONSTRAINT PURGE;

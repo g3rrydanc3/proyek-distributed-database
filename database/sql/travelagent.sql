@@ -4,9 +4,12 @@ drop user admintravelagent cascade;
 
 create user admintravelagent identified by admin;
 grant connect, UNLIMITED TABLESPACE, resource to admintravelagent;
-
+grant create public database link to admintravelagent;
 connect admintravelagent/admin@travelagent
 
+create public database link keFrontOffice
+connect to adminfrontoffice identified by admin
+using 'FrontOffice';
 -- -----------------------------------------------------
 -- Table agent
 -- -----------------------------------------------------
