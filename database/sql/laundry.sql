@@ -24,7 +24,7 @@ CREATE TABLE laundry_bill (
   employee_id NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_2 NOT NULL,
   total NUMBER(10) CONSTRAINT NN_LAUNDRY_BILL_3 NOT NULL,
   bill_date TIMESTAMP CONSTRAINT NN_LAUNDRY_BILL_4 NOT NULL
-;
+);
 
 
 -- -----------------------------------------------------
