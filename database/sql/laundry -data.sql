@@ -58,7 +58,6 @@ end;
 /
 show err;
 
-insert into laundry_service (service_type, price) VALUES ('collecting',50000);
 insert into laundry_service (service_type, price) VALUES ('sorting',25000);
 insert into laundry_service (service_type, price) VALUES ('washing',90000);
 insert into laundry_service (service_type, price) VALUES ('drying',85000);
