@@ -159,6 +159,13 @@ CREATE TABLE bill_detail (
    )
 ;
 
+CREATE TABLE agent (
+  agent_id NUMBER(10),
+  name VARCHAR2(100)  CONSTRAINT NN_AGENT_FIRST_NAME NOT NULL,
+  username VARCHAR2(100) CONSTRAINT NN_AGENT_USERNAME NOT NULL,
+  password VARCHAR2(100) CONSTRAINT NN_AGENT_PASSWORD NOT NULL,
+  CONSTRAINT PK_AGENT_AGENT_ID PRIMARY KEY (agent_id))
+;
 
 grant select,update,delete on room_type to ADMIN;
 grant select,update,delete on room to ADMIN;
