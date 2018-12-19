@@ -99,10 +99,10 @@ end;
 /
 show err;
 
-insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0001);
-insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0003);
-insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0002);
-insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0007);
-insert into menu_bill_detail (menu_bill_id,menu_id) VALUES (1812180004,0002);
+insert into menu_bill_detail (menu_bill_id,menu_id, qty, total) VALUES (1912180001,0001, 1, 200000);
+insert into menu_bill_detail (menu_bill_id,menu_id, qty, total) VALUES (1912180002,0003, 1, 450000);
+insert into menu_bill_detail (menu_bill_id,menu_id, qty, total) VALUES (1912180003,0002, 1, 100000);
+insert into menu_bill_detail (menu_bill_id,menu_id, qty, total) VALUES (1912180004,0007, 1, 750000);
+insert into menu_bill_detail (menu_bill_id,menu_id, qty, total) VALUES (1912180005,0002, 1, 20000);
 
 commit;
