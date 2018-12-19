@@ -1,5 +1,16 @@
 connect adminfrontoffice/admin@frontoffice
 
+drop user KW008;                                
+drop user RM007;                                
+drop user AD006;                                
+drop user AD005;                                
+drop user AD004;                                
+drop user AC003;                                
+drop user AC002;                                
+drop user AC001;
+drop sequence sqLogEmployee;
+drop table logEmployee;
+
 create or replace trigger tInsRoomType
 before insert
 on room_type
@@ -238,11 +249,11 @@ end;
 /
 show err;
 
-insert into bill (employee_id, customer_id, total) values ('EM001', 'CU001', 1050000);
-insert into bill (employee_id, customer_id, total) values ('EM002', 'CU002', 600000);
-insert into bill (employee_id, customer_id, total) values ('EM002', 'CU003', 800000);
-insert into bill (employee_id, customer_id, total) values ('EM005', 'CU004', 250000);
-insert into bill (employee_id, customer_id, total) values ('EM003', 'CU005', 1550000);
+insert into bill (employee_id, customer_id, total) values ('EM001', '2171112612889001', 1050000);
+insert into bill (employee_id, customer_id, total) values ('EM002', '2171111612889001', 600000);
+insert into bill (employee_id, customer_id, total) values ('EM002', '2171212961189001', 800000);
+insert into bill (employee_id, customer_id, total) values ('EM005', '2171112612889002', 250000);
+insert into bill (employee_id, customer_id, total) values ('EM003', '2170101012889001', 1550000);
 
 ----------------------------------------------------------------------------------------------------
 create or replace trigger tInsPayment
@@ -264,16 +275,16 @@ end;
 /
 show err;
 
-insert into payment (bill_id, payment_date, payment_method) values ('1812180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (bill_id, payment_date, payment_method) values ('1812180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
-insert into payment (bill_id, payment_date, payment_method) values ('1812180004', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('1812180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method) values ('1912180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method) values ('1912180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1912180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1912180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1912180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1912180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6019122251477112');
+insert into payment (bill_id, payment_date, payment_method) values ('1912180004', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1912180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1912180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('1912180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
 
 ----------------------------------------------------------------------------------------------------
 create or replace trigger tInsService
@@ -326,15 +337,15 @@ end;
 /
 show err;
 
-insert into bill_detail (payment_id, service_id) values ('P181218001', 'S181218001');
-insert into bill_detail (payment_id, service_id) values ('P181218002', 'S181218002');
-insert into bill_detail (payment_id, service_id) values ('P181218003', 'S181218003');
-insert into bill_detail (payment_id, service_id) values ('P181218004', 'S181218004');
-insert into bill_detail (payment_id, service_id) values ('P181218005', 'S181218005');
-insert into bill_detail (payment_id, service_id) values ('P181218006', 'S181218006');
-insert into bill_detail (payment_id, service_id) values ('P181218007', 'S181218007');
-insert into bill_detail (payment_id, service_id) values ('P181218008', 'S181218008');
-insert into bill_detail (payment_id, service_id) values ('P181218009', 'S181218009');
-insert into bill_detail (payment_id, service_id) values ('P181218010', 'S181218010');
+insert into bill_detail (payment_id, service_id) values ('P191218001', 'S191218001');
+insert into bill_detail (payment_id, service_id) values ('P191218002', 'S191218002');
+insert into bill_detail (payment_id, service_id) values ('P191218003', 'S191218003');
+insert into bill_detail (payment_id, service_id) values ('P191218004', 'S191218004');
+insert into bill_detail (payment_id, service_id) values ('P191218005', 'S191218005');
+insert into bill_detail (payment_id, service_id) values ('P191218006', 'S191218006');
+insert into bill_detail (payment_id, service_id) values ('P191218007', 'S191218007');
+insert into bill_detail (payment_id, service_id) values ('P191218008', 'S191218008');
+insert into bill_detail (payment_id, service_id) values ('P191218009', 'S191218009');
+insert into bill_detail (payment_id, service_id) values ('P191218010', 'S191218010');
 
 commit;
