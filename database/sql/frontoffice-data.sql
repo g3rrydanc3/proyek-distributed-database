@@ -295,16 +295,16 @@ end;
 /
 show err;
 
-insert into service (room_no, service_type, service_date, total) values (605, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 800000);
-insert into service (room_no, service_type, service_date, total) values (101, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 250000);
-insert into service (room_no, service_type, service_date, total) values (103, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 250000);
-insert into service (room_no, service_type, service_date, total) values (203, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 350000);
-insert into service (room_no, service_type, service_date, total) values (201, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 350000);
-insert into service (room_no, service_type, service_date, total) values (304, 'front officce', to_date('1212-2018', 'dd-mm-yyyy'), 450000);
-insert into service (room_no, service_type, service_date, total) values (102, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 250000);
-insert into service (room_no, service_type, service_date, total) values (504, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 650000);
-insert into service (room_no, service_type, service_date, total) values (401, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 550000);
-insert into service (room_no, service_type, service_date, total) values (204, 'front officce', to_date('12-12-2018', 'dd-mm-yyyy'), 350000);
+insert into service (room_no, service_type, service_date, total) values (605, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 800000);
+insert into service (room_no, service_type, service_date, total) values (101, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 250000);
+insert into service (room_no, service_type, service_date, total) values (103, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 250000);
+insert into service (room_no, service_type, service_date, total) values (203, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 350000);
+insert into service (room_no, service_type, service_date, total) values (201, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 350000);
+insert into service (room_no, service_type, service_date, total) values (304, 'front office', to_date('1212-2018', 'dd-mm-yyyy'), 450000);
+insert into service (room_no, service_type, service_date, total) values (102, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 250000);
+insert into service (room_no, service_type, service_date, total) values (504, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 650000);
+insert into service (room_no, service_type, service_date, total) values (401, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 550000);
+insert into service (room_no, service_type, service_date, total) values (204, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 350000);
 
 ----------------------------------------------------------------------------------------------------
 create or replace trigger tInsBillDetail
