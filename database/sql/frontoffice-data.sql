@@ -139,12 +139,13 @@ begin
 end;
 /
 show err;
+drop trigger tInsCustomer;
 
-insert into customer (first_name, last_name, address, phone) values ('Aaron', 'Anderson', '07 Maple Wood Parkway', '1-(609)466-5410');
-insert into customer (first_name, last_name, address, phone) values ('Angela', 'Andrews', '40 Magdeline Hill', '1-(915)960-2125');
-insert into customer (first_name, last_name, address, phone) values ('Albert', 'Bailey', '50 Dorton Parkway', '1-(240)490-3825');
-insert into customer (first_name, last_name, address, phone) values ('Ann', 'Baker','4453 Starling Point', '1-(801)235-9148');
-insert into customer (first_name, last_name, address, phone) values ('Annie', 'Banks', '577 Talmadge Junction', '1-(352)347-5840');
+insert into customer (customer_id,first_name, last_name, address, phone) values ('2171112612889001','Aarron', 'Anderson', '07 Maple Wood Parkway', '1-(609)466-5410');
+insert into customer (customer_id,first_name, last_name, address, phone) values ('2171111612889001','Angela', 'Andrews', '40 Magdeline Hill', '1-(915)960-2125');
+insert into customer (customer_id,first_name, last_name, address, phone) values ('2171212961189001','Albert', 'Bailey', '50 Dorton Parkway', '1-(240)490-3825');
+insert into customer (customer_id,first_name, last_name, address, phone) values ('2171112612889002','Ann', 'Baker','4453 Starling Point', '1-(801)235-9148');
+insert into customer (customer_id,first_name, last_name, address, phone) values ('2170101012889001','Annie', 'Banks', '577 Talmadge Junction', '1-(352)347-5840');
 
 ---------------------------------------------------------------------------------------------------
 create sequence sqLogEmployee minvalue 1 start with 1 increment by 1;
