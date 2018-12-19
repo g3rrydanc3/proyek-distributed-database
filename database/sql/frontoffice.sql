@@ -99,7 +99,7 @@ CREATE TABLE employee (
 CREATE TABLE bill (
   bill_id VARCHAR2(10) CONSTRAINT pk_bill_id PRIMARY KEY,
   employee_id VARCHAR2(5) CONSTRAINT nn_payment_employee_id NOT NULL,
-  customer_id VARCHAR2(5) CONSTRAINT nn_bill_customer_id NOT NULL,
+  customer_id VARCHAR2(16) CONSTRAINT nn_bill_customer_id NOT NULL,
   total NUMBER(10) CONSTRAINT nn_bill_total NOT NULL,
   CONSTRAINT fk_bill_customer1
     FOREIGN KEY (customer_id)
