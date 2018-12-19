@@ -26,11 +26,28 @@ end;
 /
 show err;
 
-insert into agent (name,username,password) VALUES ('Airbnb','Airbnb','aaaa');
-insert into agent (name,username,password) VALUES ('Pegipegi','Pegipegi','pppp');
-insert into agent (name,username,password) VALUES ('Traveloka','Traveloka','tttt');
-insert into agent (name,username,password) VALUES ('Airyrooms','Airyrooms','rrrr');
-insert into agent (name,username,password) VALUES ('Dealoka','Dealoka','dddd');
+create or replace trigger tInsUP
+before insert
+on agent
+for each row
+declare
+	indeks number(4);
+	temp number(5);
+	new_agent_id varchar2(10);
+begin
+	:new.username := :new.name;
+	:new.password := LOWER(substr(:new.name,0,1))||LOWER(substr(:new.name,0,1))||LOWER(substr(:new.name,0,1))||LOWER(substr(:new.name,0,1));
+end;
+/
+show err;
+
+insert into agent (name) VALUES ('Airbnb');
+insert into agent (name) VALUES ('Pegipegi');
+insert into agent (name) VALUES ('Traveloka');
+insert into agent (name) VALUES ('Airyrooms');
+insert into agent (name) VALUES ('Dealoka');
+insert into agent (name) VALUES ('TirtaJaya');
+insert into agent (name) VALUES ('Dongmun');
 
 ------------------------------------------------------------------------------------------------
 create or replace trigger tInsReservation
