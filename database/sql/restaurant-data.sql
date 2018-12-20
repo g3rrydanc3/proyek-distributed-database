@@ -53,7 +53,7 @@ create table logBill (
 );
 
 create or replace trigger tInsMenu_bill
-before insert or update
+before insert
 on menu_bill
 for each row
 declare
@@ -65,25 +65,21 @@ declare
 begin
 	select user into tUser 
 	from dual;
-
-	if inserting then
-		select count(menu_bill_id) into indeks from menu_bill;
-		if indeks is null then
-			new_id := to_char(sysdate, 'ddmmyy')||'0001';
+	select count(menu_bill_id) into indeks from menu_bill;
+	if indeks is null then
+		new_id := to_char(sysdate, 'ddmmyy')||'0001';
+	else
+		if to_number(indeks)+1 <9 then
+			temp := to_number(indeks)+1;
+			new_id := to_char(sysdate, 'ddmmyy')||lpad(temp, 4, '0');
 		else
-			if to_number(indeks)+1 <9 then
-				temp := to_number(indeks)+1;
-				new_id := to_char(sysdate, 'ddmmyy')||lpad(temp, 4, '0');
-			else
-				temp := to_number(indeks)+1;
-				new_id := to_char(sysdate, 'ddmmyy')||lpad(temp, 3, '0');
-			end if;
+			temp := to_number(indeks)+1;
+			new_id := to_char(sysdate, 'ddmmyy')||lpad(temp, 3, '0');
 		end if;
-		:new.menu_bill_id := new_id;
-	elsif updating then
-		if :new.room_no <> 0 then 
-			insert into logBill values (sqLogBill.nextval, sysdate, tUser, 'U', :old.menu_bill_id, 'F');
-		end if;
+	end if;
+	:new.menu_bill_id := new_id;
+	if :new.room_no <> 0 then 
+		insert into logBill values (sqLogBill.nextval, sysdate, tUser, 'I', new_id, 'F');
 	end if;
 end;
 /
