@@ -306,6 +306,25 @@ end;
 /
 show err;
 
+create or replace trigger tAfterInsService
+after insert
+on service
+for each row
+declare
+	roomno varchar2(10);
+	totalservice varchar2(10);
+	billid varchar2(10);
+begin
+	select room_no into roomno from service where room_no = :NEW.room_no;
+	if roomno is not null then
+		select total into totalservice from service where room_no = roomno;
+		select bill_id into billid from bill where substr(bill_id, 7, 4) = (select max(to_number(substr(bill_id, 7, 4))) from bill);
+		update bill set total = total + totalservice where bill_id = billid;
+	end if;
+end;
+/
+show err;
+
 insert into service (room_no, service_type, service_date, total) values (605, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 800000);
 insert into service (room_no, service_type, service_date, total) values (101, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 250000);
 insert into service (room_no, service_type, service_date, total) values (103, 'front office', to_date('12-12-2018', 'dd-mm-yyyy'), 250000);
