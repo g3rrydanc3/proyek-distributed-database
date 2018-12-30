@@ -105,6 +105,7 @@ CREATE TABLE bill (
   employee_id VARCHAR2(5) CONSTRAINT nn_payment_employee_id NOT NULL,
   customer_id VARCHAR2(16) CONSTRAINT nn_bill_customer_id NOT NULL,
   total NUMBER(10) CONSTRAINT nn_bill_total NOT NULL,
+  status NUMBER(1) CONSTRAINT nn_bill_status NOT NULL,
   CONSTRAINT fk_bill_customer1
     FOREIGN KEY (customer_id)
     REFERENCES customer (customer_id),

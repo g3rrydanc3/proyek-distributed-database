@@ -249,11 +249,11 @@ end;
 /
 show err;
 
-insert into bill (employee_id, customer_id, total) values ('EM001', '2171112612889001', 1050000);
-insert into bill (employee_id, customer_id, total) values ('EM002', '2171111612889001', 600000);
-insert into bill (employee_id, customer_id, total) values ('EM002', '2171212961189001', 800000);
-insert into bill (employee_id, customer_id, total) values ('EM005', '2171112612889002', 250000);
-insert into bill (employee_id, customer_id, total) values ('EM003', '2170101012889001', 1550000);
+insert into bill (employee_id, customer_id, total,status) values ('EM001', '2171112612889001', 1050000,1);
+insert into bill (employee_id, customer_id, total,status) values ('EM002', '2171111612889001', 600000,1);
+insert into bill (employee_id, customer_id, total,status) values ('EM002', '2171212961189001', 800000,1);
+insert into bill (employee_id, customer_id, total,status) values ('EM005', '2171112612889002', 250000,1);
+insert into bill (employee_id, customer_id, total,status) values ('EM003', '2170101012889001', 1550000,1);
 
 ----------------------------------------------------------------------------------------------------
 create or replace trigger tInsPayment
@@ -275,16 +275,16 @@ end;
 /
 show err;
 
-insert into payment (bill_id, payment_date, payment_method) values ('2012180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (bill_id, payment_date, payment_method) values ('2012180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('2012180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('2012180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('2012180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6020122251477112');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('2012180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6020122251477112');
+insert into payment (bill_id, payment_date, payment_method) values ('3012180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method) values ('3012180001', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6020122251477112');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6020122251477112');
 insert into payment (bill_id, payment_date, payment_method) values ('2012180004', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('2012180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('2012180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
-insert into payment (bill_id, payment_date, payment_method, card_no) values ('2012180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
+insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
 
 ----------------------------------------------------------------------------------------------------
 create or replace trigger tInsService
