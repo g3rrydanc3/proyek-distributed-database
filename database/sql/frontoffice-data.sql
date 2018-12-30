@@ -281,7 +281,7 @@ insert into payment (bill_id, payment_date, payment_method, card_no) values ('30
 insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180002', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '1522348576912548');
 insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6020122251477112');
 insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180003', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'credit', '6020122251477112');
-insert into payment (bill_id, payment_date, payment_method) values ('2012180004', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
+insert into payment (bill_id, payment_date, payment_method) values ('3012180004', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'cash');
 insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
 insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
 insert into payment (bill_id, payment_date, payment_method, card_no) values ('3012180005', to_date(to_char(sysdate, 'ddmmyyyy'), 'DD-MM-YYYY'), 'debit', '5124879936521445');
@@ -337,15 +337,15 @@ end;
 /
 show err;
 
-insert into bill_detail (payment_id, service_id) values ('P201218001', 'S201218001');
-insert into bill_detail (payment_id, service_id) values ('P201218002', 'S201218002');
-insert into bill_detail (payment_id, service_id) values ('P201218003', 'S201218003');
-insert into bill_detail (payment_id, service_id) values ('P201218004', 'S201218004');
-insert into bill_detail (payment_id, service_id) values ('P201218005', 'S201218005');
-insert into bill_detail (payment_id, service_id) values ('P201218006', 'S201218006');
-insert into bill_detail (payment_id, service_id) values ('P201218007', 'S201218007');
-insert into bill_detail (payment_id, service_id) values ('P201218008', 'S201218008');
-insert into bill_detail (payment_id, service_id) values ('P201218009', 'S201218009');
-insert into bill_detail (payment_id, service_id) values ('P201218010', 'S201218010');
+insert into bill_detail (payment_id, service_id) values ('P301218001', 'S301218001');
+insert into bill_detail (payment_id, service_id) values ('P301218002', 'S301218002');
+insert into bill_detail (payment_id, service_id) values ('P301218003', 'S301218003');
+insert into bill_detail (payment_id, service_id) values ('P301218004', 'S301218004');
+insert into bill_detail (payment_id, service_id) values ('P301218005', 'S301218005');
+insert into bill_detail (payment_id, service_id) values ('P301218006', 'S301218006');
+insert into bill_detail (payment_id, service_id) values ('P301218007', 'S301218007');
+insert into bill_detail (payment_id, service_id) values ('P301218008', 'S301218008');
+insert into bill_detail (payment_id, service_id) values ('P301218009', 'S301218009');
+insert into bill_detail (payment_id, service_id) values ('P301218010', 'S301218010');
 
 commit;
